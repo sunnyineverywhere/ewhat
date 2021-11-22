@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "please-attendence",
-    "slug": "please-attendence",
+    "name": "mainPageApp",
+    "slug": "mainPageApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
