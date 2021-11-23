@@ -4,6 +4,7 @@ import { viewStyles,textStyles} from './styles';
 import Input from './components/Input';
 import Task from './components/Task';
 import IconButton from './components/IconButton';
+import MenuButton from './components/MenuButton';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { images } from './image';
@@ -59,9 +60,7 @@ const HomeScreen = ({navigation}) =>{
        <View style={viewStyles.header}>
          <Text style ={textStyles.title}>Date: {today}</Text>
          <TouchableOpacity onPress={()=> navigation.navigate('Menu') }>
-            <Text>
-               menu
-            </Text>
+         <IconButton type={images.menu} onPressOut= {()=> navigation.navigate('Menu')} style={viewStyles.button}/>
          </TouchableOpacity>
          
          <IconButton type={images.add} onPressOut= {()=> navigation.navigate('AddSubject')}/>
@@ -70,16 +69,15 @@ const HomeScreen = ({navigation}) =>{
        <Input value={newTask} onChangeText={_handleTextChange}
          onSubmitEditing={_addTask} onBlur={_onBlur}/>
 
-      <View style={viewStyles.button}>
+      
          <TouchableOpacity  onPress={_deletAllTask}>
-            <Text>Delete All</Text>
+            <Text style={viewStyles.buttonText}>Delete All</Text>
          </TouchableOpacity>
 
          <TouchableOpacity onPress={_sortTasks}>
-            <Text>Sort Items</Text>
+         <Text style={viewStyles.buttonText}>Sort Items</Text>
          </TouchableOpacity>
 
-         </View>
          <ScrollView width = {width-20} >
 
             {Object.values(tasks).reverse().map(item => (
