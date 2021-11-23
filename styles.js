@@ -4,10 +4,15 @@ import {theme} from './theme';
 export const viewStyles = StyleSheet.create({
     container:{
         flex:1,
-        backgroundColor: theme.background,
+        backgroundColor: theme.background,  
     },
     header:{
         flexDirection: 'row',
+    },
+    button:{
+        color: theme.main,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     }
 });
 export const textStyles = StyleSheet.create({
@@ -33,20 +38,6 @@ export const textStyles = StyleSheet.create({
         paddingHorizontal: 32,
         borderRadius: 4,
         elevation: 3,
-        backgroundColor: '#D0CAB2',
         margin: 10,
-    }
-});
-export const Buttonstyles = StyleSheet.create({
-    button:{
-        marginBottom: 3,
-        alignContent: 'center',
-        backgroundColor: "white",
-    },
-    mainBtn:{
-        fontSize: 25,
-        fontWeight: '600',
-        marginHorizontal: 10,
-        color: "black",
     }
 });
