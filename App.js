@@ -35,8 +35,9 @@ const HomeScreen = ({navigation}) =>{
       const selectedTask = []
    };
    const _sortTasks = () => {
-       const sortTask = [...tasks];
-       sortTask.sort((a,b) => (a.id-b.id)? 1: -1);
+         const sortTasks = Object.values(tasks);
+      sortTasks.reverse();
+
    };
    const _toggleTask = id => {
       const currentTasks = Object.assign({}, tasks);
