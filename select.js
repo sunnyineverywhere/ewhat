@@ -22,7 +22,7 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
   </TouchableOpacity>
 );
 
-const App = () => {
+const select = () => {
   const [selectedId, setSelectedId] = useState(null);
 
   const renderItem = ({ item }) => {
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default select;
