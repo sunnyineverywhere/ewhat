@@ -59,7 +59,7 @@ const HomeScreen = ({navigation}) =>{
        <View style={viewStyles.header}>
          <Text style ={textStyles.title}>Date: {today}</Text>
          <TouchableOpacity onPress={()=> navigation.navigate('Menu') }>
-            <Text>
+            <Text style={textStyles.menu}>
                menu
             </Text>
          </TouchableOpacity>
