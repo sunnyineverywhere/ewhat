@@ -67,11 +67,11 @@ const HomeScreen = ({navigation}) =>{
          <Input value={newTask} onChangeText={_handleTextChange}
          onSubmitEditing={_addTask} onBlur={_onBlur}/>
          <TouchableOpacity style={Buttonstyles.button} onPress={_deletAllTask}>
-            <Text>Delete All</Text>
+            <Text style={textStyles.delNsort}>Delete All</Text>
          </TouchableOpacity>
 
          <TouchableOpacity style={Buttonstyles.button} onPress={_sortTasks}>
-            <Text>Sort Items</Text>
+            <Text style={textStyles.delNsort}>Sort Items</Text>
          </TouchableOpacity>
          <ScrollView width = {width-20}>
             {Object.values(tasks).reverse().map(item => (
