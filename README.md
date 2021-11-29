@@ -19,6 +19,8 @@ directory
   - navigation
     - stack.js // page 넘어가는 거 관리
     - pages
+  - calendar
+    - Calendar.js 
 - App.js // export src/app.js on display
 - app.json
 - package.json
