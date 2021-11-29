@@ -21,7 +21,7 @@ LocaleConfig.locales['fr'] = {
 LocaleConfig.defaultLocale = 'fr';
 
 
-class App extends Component {
+class Calendar extends Component {
   render() {
      return (
       <View style={{ paddingTop: 50, flex: 1 }}>
@@ -80,4 +80,4 @@ onDayPress={(day) => {
    }
  }
 
-export default App;
+export default Calendar;
