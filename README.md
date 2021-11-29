@@ -24,3 +24,4 @@ directory
 - package.json
 - images
     - https://icons8.kr
+    - https://fonts.google.com/icons
