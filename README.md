@@ -22,3 +22,5 @@ directory
 - App.js // export src/app.js on display
 - app.json
 - package.json
+- images
+    - https://icons8.kr
