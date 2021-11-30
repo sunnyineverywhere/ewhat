@@ -1,5 +1,5 @@
 import React, { useState, } from 'react';
-import { Text, SafeAreaView,View, Dimensions, Button, ScrollView, TouchableOpacity,Stylesheet} from 'react-native';
+import { Text, SafeAreaView,View,FlatList, Dimensions,ScrollView, TouchableOpacity} from 'react-native';
 import { viewStyles,textStyles} from './styles';
 import Input from './components/Input';
 import Task from './components/Task';
@@ -8,41 +8,56 @@ import MenuButton from './components/MenuButton';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { images } from './image';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AppLoading from 'expo-app-loading';
+
 
 
 
 const HomeScreen = ({navigation}) =>{
    const width = Dimensions.get('window').width;
+   const [isReady, setIsReady] = useState(false);
    const [newTask, setNewTask] = useState('');
    const [tasks, setTasks] = useState({});
+
+
+   const _saveTasks = async tasks => {
+      try{
+         await AsyncStorage.setItem('tasks',JSON.stringify(tasks));
+         setTasks(tasks);
+      }catch(e) {
+         console.error(e);
+      }
+   }
    const _addTask = () =>{
       const ID = Date.now().toString();
       const newTaskObject = {
-         [ID]: {id: ID, text: newTask, completed: false},
+         [ID]: {id: ID, text: newTask, completed: false, selected: false},
       };
       setNewTask('');
-      setTasks({...tasks,...newTaskObject});
+      //setTasks({...tasks,...newTaskObject});
+      _saveTasks({...tasks,...newTaskObject });
    }
    const _deleteTask = id => {
       const currentTasks = Object.assign({}, tasks);
       delete currentTasks[id];
-      setTasks(currentTasks);
+      //setTasks(currentTasks);
+      _saveTasks(currentTasks);
    };
    const _deletAllTask = () => {
       setTasks([]);
+  
    };
-   const _deleteSelectedTask = () => {
-      const selectedTask = []
-   };
-   const _sortTasks = () => {
-         const sortTasks = Object.values(tasks);
+   const _sortTask = () => {
+      const sortTasks = Object.values(tasks);
       sortTasks.reverse();
-
+      setTasks(sortTasks);    
    };
    const _toggleTask = id => {
       const currentTasks = Object.assign({}, tasks);
       currentTasks[id]['completed'] = !currentTasks[id]['completed'];
-      setNewTask(currentTasks);
+     // setNewTask(currentTasks);
+      _saveTasks(currentTasks);
    };
    const _handleTextChange = text => {
       setNewTask(text);
@@ -50,59 +65,55 @@ const HomeScreen = ({navigation}) =>{
    const _updateTask = item => {
       const currentTasks = Object.assign({},tasks);
       currentTasks[item.id] = item;
-      setTasks(currentTasks);
+      //setTasks(currentTasks);
+      _saveTasks(currentTasks);
    };
    const _onBlur = () => {
       setNewTask('');
    };
-   
-   var [ isPress, setIsPress ] = React.useState(false);
-   var touchProps = {
-       activeOpacity: 1,
-    underlayColor: 'blue',                               
-    style: isPress ? styles.btnPress : styles.btnNormal, 
-    onHideUnderlay: () => setIsPress(false),
-    onShowUnderlay: () => setIsPress(true),
-    onPress: () => console.log('HELLO'),              
-  };
- 
-    return (
+   const _loadTasks = async () => {
+      const loadedTasks = await AsyncStorage.getItem('tasks');
+      setTasks(JSON.parse(loadedTasks || '{}'));
+   };
+  
+    return isReady ? (
+        
     <SafeAreaView style={viewStyles.container}>
        <View style={viewStyles.header}>
          <Text style ={textStyles.title}>Date: {today}</Text>
+         <View style={viewStyles.btnContainer}>
          <TouchableOpacity onPress={()=> navigation.navigate('Menu') }>
-         <IconButton type={images.menu} onPressOut= {()=> navigation.navigate('Menu')} style={viewStyles.button}/>
+         <IconButton type={images.menu} onPressOut= {()=> navigation.navigate('Menu')}/>
          </TouchableOpacity>
-         
          <IconButton type={images.add} onPressOut= {()=> navigation.navigate('AddSubject')}/>
-
+         </View>
        </View>
        <Input value={newTask} onChangeText={_handleTextChange}
-         onSubmitEditing={_addTask} onBlur={_onBlur}/>
+         onSubmitEditing={_addTask} onBlur={_onBlur}/> 
 
       
-         <TouchableOpacity  onPress={_deletAllTask}>
+         <TouchableOpacity  onPress={_deletAllTask} style={viewStyles.btnContainer}>
             <Text style={viewStyles.buttonText}>Delete All</Text>
          </TouchableOpacity>
-
-         <TouchableOpacity onPress={_sortTasks}>
-         <Text style={viewStyles.buttonText}>Sort Items</Text>
+         <TouchableOpacity  onPress={_sortTask} style={viewStyles.btnContainer}>
+            <Text style={viewStyles.buttonText}>Sort</Text>
          </TouchableOpacity>
-
-         <ScrollView width = {width-20} >
-             <TouchableOpacity {...touchProps}>
-        <Text>Click here</Text>
-      </TouchableOpacity>
-            {Object.values(tasks).reverse().map(item => (
+         <ScrollView width = {width-20}>
+            {Object.values(tasks).map(item => (
                <Task key = {item.id} item={item} deleteTask={_deleteTask} 
-               toggleTask={_toggleTask} updateTask={_updateTask}/>
+               toggleTask={_toggleTask} updateTask={_updateTask} 
+             />
            ))}
-         </ScrollView>
-
+       </ScrollView>
     </SafeAreaView>
    
     
-   )
+   ) : (
+      <AppLoading 
+         startAsync = {_loadTasks}
+         onFinish = {() => setIsReady(true)}
+         onError={console.error}/>
+   );
 }
 
 const MenuScreen = ({navigation}) => {
@@ -134,7 +145,6 @@ const SearchPage = () =>{
       </View>
    );
 }
-
 const AddSubjectPage = () =>{
    return(
       <View>
@@ -159,30 +169,5 @@ const App = () => {
     </NavigationContainer>
  )
 };
-
-
-
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  btnNormal: {
-    borderColor: 'blue',
-    borderWidth: 1,
-    borderRadius: 10,
-    height: 30,
-    width: 100,
-  },
-  btnPress: {
-    borderColor: 'blue',
-    borderWidth: 1,
-    height: 30,
-    width: 100,
-  }
-});
-
 
 export default App;
