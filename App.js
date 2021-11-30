@@ -1,5 +1,5 @@
 import React, { useState, } from 'react';
-import { Text, SafeAreaView,View, Dimensions, Button, ScrollView, TouchableOpacity} from 'react-native';
+import { Text, SafeAreaView,View, Dimensions, Button, ScrollView, TouchableOpacity,Stylesheet} from 'react-native';
 import { viewStyles,textStyles} from './styles';
 import Input from './components/Input';
 import Task from './components/Task';
@@ -55,6 +55,16 @@ const HomeScreen = ({navigation}) =>{
    const _onBlur = () => {
       setNewTask('');
    };
+   
+   var [ isPress, setIsPress ] = React.useState(false);
+   var touchProps = {
+       activeOpacity: 1,
+    underlayColor: 'blue',                               
+    style: isPress ? styles.btnPress : styles.btnNormal, 
+    onHideUnderlay: () => setIsPress(false),
+    onShowUnderlay: () => setIsPress(true),
+    onPress: () => console.log('HELLO'),              
+  };
  
     return (
     <SafeAreaView style={viewStyles.container}>
@@ -80,7 +90,9 @@ const HomeScreen = ({navigation}) =>{
          </TouchableOpacity>
 
          <ScrollView width = {width-20} >
-
+             <TouchableOpacity {...touchProps}>
+        <Text>Click here</Text>
+      </TouchableOpacity>
             {Object.values(tasks).reverse().map(item => (
                <Task key = {item.id} item={item} deleteTask={_deleteTask} 
                toggleTask={_toggleTask} updateTask={_updateTask}/>
@@ -147,5 +159,30 @@ const App = () => {
     </NavigationContainer>
  )
 };
+
+
+
+
+var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  btnNormal: {
+    borderColor: 'blue',
+    borderWidth: 1,
+    borderRadius: 10,
+    height: 30,
+    width: 100,
+  },
+  btnPress: {
+    borderColor: 'blue',
+    borderWidth: 1,
+    height: 30,
+    width: 100,
+  }
+});
+
 
 export default App;
