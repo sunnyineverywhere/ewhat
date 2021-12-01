@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
-
+//
 class PickerComponent extends Component {
   render() {
     return (
