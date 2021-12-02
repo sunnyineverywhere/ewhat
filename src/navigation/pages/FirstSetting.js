@@ -4,18 +4,24 @@ import subjectContext from "../../components/context/subject";
 import { subjectProvider } from "../../components/context/subject";
 import Subject from "../../components/subject";
 import Input from "../../components/AddSubject";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View } from "react-native";
+import { Button } from "react-native";
 
-const FirstSetting = () => {
+const FirstSetting = ({navigation}) => {
 
 
     return (
         <subjectProvider>
-            <SafeAreaView>
-                <Subject />
-                <Input />
-            </SafeAreaView>
-        </subjectProvider>
+            <View style={FSstyles.view}>
+                
+                    <Subject />
+                    <Input />
+                    <Button 
+            title = "init"
+            onPress = {() => navigation.navigate('InputSubject')} />
+                
+            </View>
+            </subjectProvider>
 
     )
 }
@@ -38,6 +44,11 @@ const FSstyles = StyleSheet.create({
         letterSpacing: 0.25,
         color: '#035A15',
     },
+    view: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    }
 });
 
 export default FirstSetting;
