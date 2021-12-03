@@ -1,19 +1,46 @@
 import React from "react";
+import styled, {ThemeProvider} from 'styled-components/native'
 import 'react-native-gesture-handler';
 import { Component } from "react";
-import {Button} from 'react-native'
-import { SafeAreaView, StyleSheet, Text } from "react-native";
+import { SafeAreaView, StatusBar, StyleSheet, Text } from "react-native";
 import { startviewStyles } from "../../styles";
+import { theme } from "../../theme";
+import Inputnames from "../../components/Inputnames";
 
 const InputSubject = ({navigation}) => {
     return(
-        <SafeAreaView style = {startviewStyles.container}>
-            <Text style = {startviewStyles.startTitle}>Input each name of subjects</Text>
-            <Button 
-            title = "move to calandar"
-            onPress = {() => navigation.navigate('FirstSetting')} />
-        </SafeAreaView>
+        <ThemeProvider theme = {theme}>
+            <Container>
+                <StatusBar 
+                    barStyle='light-content'     
+                />
+                <Title>Input lectures</Title>
+                <Inputnames plaehorder = "+ Add subjects"/>
+            </Container>
+        </ThemeProvider>
     );
 };
 
+const Container = styled.View`
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    background-color: #101010;
+`;
+
+const Title = styled.Text`
+    font-size: 40px;
+    font-weight: 600;
+    color: #63855d;
+    align-self: flex-start;
+    margin: 20px;`
+
+
+
 export default InputSubject;
+
+/*
+           <Button 
+            title = "move to calandar"
+            onPress = {() => navigation.navigate('FirstSetting')} />
+            */
