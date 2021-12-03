@@ -1,167 +1,229 @@
-import React from "react";
-import{StyleSheet,View,ActivityIndicator,FlatList,Text,TouchableOpacity,Image} from "react-native";
-import { Icon } from "react-native-elements";
+import React, { useState, } from 'react';
+import { Text, SafeAreaView,View,FlatList, Dimensions,ScrollView, TouchableOpacity, Pressable} from 'react-native';
+import { viewStyles,textStyles} from './styles';
+import Input from './components/Input';
+import Task from './components/Task';
+import IconButton from './components/IconButton';
+import MenuButton from './components/MenuButton';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { images } from './image';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AppLoading from 'expo-app-loading';
 
 
-export default class Store extends React.Component { 
-  constructor(props) {
-    super(props)
-    this.state = {
-      loading: false,
-      dataSource: [],
-     };
-  }
-  componentDidMount() {this.fetchData();}
+
+
+const HomeScreen = ({navigation}) =>{
+   const width = Dimensions.get('window').width;
+   const [isReady, setIsReady] = useState(false);
+   const [newTask, setNewTask] = useState('');
+   const [tasks, setTasks] = useState({});
+
+
+   const _saveTasks = async tasks => {
+      try{
+         await AsyncStorage.setItem('tasks',JSON.stringify(tasks));
+         setTasks(tasks);
+      }catch(e) {
+         console.error(e);
+      }
+   }
+   const _addTask = () =>{
+      const ID = Date.now().toString();
+      const newTaskObject = {
+         [ID]: {id: ID, text: newTask, completed: false, selected: false},
+      };
+      setNewTask('');
+      //setTasks({...tasks,...newTaskObject});
+      _saveTasks({...tasks,...newTaskObject });
+   }
+   const _deleteTask = id => {
+      const currentTasks = Object.assign({}, tasks);
+      delete currentTasks[id];
+      //setTasks(currentTasks);
+      _saveTasks(currentTasks);
+   };
+   const _deletAllTask = () => {
+      setTasks([]);
   
-  fetchData = () => {this.setState({loading: true});
+   };
+   const _sortTask = () => {
+      let sortTasks = Object.values(tasks);
+      sortTasks.reverse();
+      setTasks(sortTasks);    
+   };
+   const _toggleTask = id => {
+      const currentTasks = Object.assign({}, tasks);
+      currentTasks[id]['completed'] = !currentTasks[id]['completed'];
+     // setNewTask(currentTasks);
+      _saveTasks(currentTasks);
+   };
+   const _handleTextChange = text => {
+      setNewTask(text);
+   };
+   const _updateTask = item => {
+      const currentTasks = Object.assign({},tasks);
+      currentTasks[item.id] = item;
+      //setTasks(currentTasks);
+      _saveTasks(currentTasks);
+   };
+   const _onBlur = () => {
+      setNewTask('');
+   };
+   const _loadTasks = async () => {
+      const loadedTasks = await AsyncStorage.getItem('tasks');
+      setTasks(JSON.parse(loadedTasks || '{}'));
+   };
   
-  fetch("https://jsonplaceholder.typicode.com/photos")
-    .then(response => response.json())
-    .then(responseJson => {
-      responseJson = responseJson.map(item => {
-        item.isSelect = false;
-        item.selectedClass = styles.list;
+    return isReady ? (
         
-        return item;
-      });
+    <SafeAreaView style={viewStyles.container}>
+       <View style={viewStyles.header}>
+         <Text style ={textStyles.title}>Date: {today}</Text>
+         <View style={viewStyles.btnContainer}>
+         <TouchableOpacity onPress={()=> navigation.navigate('Menu') }>
+         <IconButton type={images.menu} onPressOut= {()=> navigation.navigate('Menu')}/>
+         </TouchableOpacity>
+         <IconButton type={images.add} onPressOut= {()=> navigation.navigate('AddSubject')}/>
+         </View>
+       </View>
+       <Input value={newTask} onChangeText={_handleTextChange}
+         onSubmitEditing={_addTask} onBlur={_onBlur}/> 
+
+      
+         <TouchableOpacity  onPress={_deletAllTask} style={viewStyles.btnContainer}>
+            <Text style={viewStyles.buttonText}>Delete All</Text>
+         </TouchableOpacity>
+         <TouchableOpacity  onPress={_sortTask} style={viewStyles.btnContainer}>
+            <Text style={viewStyles.buttonText}>Sort</Text>
+         </TouchableOpacity>
+         {/*<ScrollView width = {width-20}> */}
+      
+           <FlatList
+           data={Object.values(tasks).map(item => (
+            <Task key = {item.id} item={item} deleteTask={_deleteTask} 
+            toggleTask={_toggleTask} updateTask={_updateTask}/>
+            ))}
+           ItemSeparatorComponent=
+           renderItem={item => this.renderItem(item)}
+           keyExtractor={item => item.id.toString()}  
+         />
+           
+           
+      {/*} </ScrollView> */}
+    </SafeAreaView>
    
-      this.setState({
-        loading: false,
-        dataSource: responseJson,
-      });
-    }).catch(error => {this.setState({loading: false});
-   });
-  };
+    
+   ) : (
+      <AppLoading 
+         startAsync = {_loadTasks}
+         onFinish = {() => setIsReady(true)}
+         onError={console.error}/>
+   );
+}
 
-FlatListItemSeparator = () => <View style={styles.line} />;
+const MenuScreen = ({navigation}) => {
+   
+   return(
+      <View style={textStyles.menuText}>
+            <MenuButton type={images.setting}
+                              onPressOut={()=> navigation.navigate('Setting') }/>
+            <MenuButton type={images.review}
+                        onPressOut={()=> navigation.navigate('Review') }/>
+            <MenuButton type={images.search}
+                        onPressOut={()=> navigation.navigate('Search') }/>
 
-selectItem = data => {
-  data.item.isSelect = !data.item.isSelect;
-  data.item.selectedClass = data.item.isSelect ? styles.selected : styles.list;
+      </View>
+   )
+   }
+// const selectionDelete = ({navigation, route})=>{
+//    const [load, setLoad] = useState();
+//    const [data, setData] = useState({});
+//    //data에는 우리가 입력한 Task를 넣어야 한다 => 페이지 넘어갈 때 data로 받음
+//    //이 페이지에선 Tasks가 곧 data라는 뜻이다
+//    const deleteTask = id => {
+//       const currentTasks = Object.assign({}, data);
+//       delete currentTasks[id];
+//       //setTasks(currentTasks);
+//    };
+//    const itemSeperator = () => {
+//       //FlatList의 아이템들의 간격을 설정하는 함수입니다.
+//       return <View style={[viewStyles.btnContainer]}/>
+//    }
+//    const renderItem = (data) =>{
+//       return(
+//          <TouchableOpacity
+//             style={[styles.btnContainer, styles.buttonText]}      
+//             onPress={() => this.selectItem(data)}>
+//             <Text style={styles.lightText}>{data.text} </Text>
+//          </TouchableOpacity>
+//       )
+//    }
+   // const isSelected = (data) => {
+   //    return load? 
+   // }
+   // const selectItem = (data) => {
+   //    setLoad(data);
+   //    setData = data.load ? styles.buttonText : styles.btnContainer;
 
-  const index = this.state.dataSource.findIndex(
-    item => data.item.id === item.id
-  );
+   // }
+   // return (
+   //    <View>
+   //       <Text>SELECT THE ITEM YOU WANT TO DELETE</Text>
+   //          <FlatList 
+   //          data={Task}
+   //          ItemSeparatorComponent={itemSeperator}
+   //          renderItem={renderItem}
+   //          keyExtractor={(data) => data.id}
+   //          extraData={data}
+   //          />
 
-  this.state.dataSource[index] = data.item;
+   //       <IconButton type={images.choose} onPressOut= {() => deleteTask()}/>
+   //    </View>
+   // )
 
-  this.setState({
-    dataSource: this.state.dataSource,
-  });
-};
 
-goToStore = () =>this.props.navigation.navigate("Expenses", {selected: this.state.selected,});
 
-renderItem = data =>
-  <TouchableOpacity
-    style={[styles.list, data.item.selectedClass]}      
-    onPress={() => this.selectItem(data)}
-  >
-  <Image
-    source={{ uri: data.item.thumbnailUrl }}
-    style={{ width: 40, height: 40, margin: 6 }}
-  />
-  <Text style={styles.lightText}>  {data.item.title.charAt(0).toUpperCase() + data.item.title.slice(1)}  </Text>
-</TouchableOpacity>
 
-render() {
-  const itemNumber = this.state.dataSource.filter(item => item.isSelect).length;
-  if (this.state.loading) {return (
-    <View style={styles.loader}>
-     <ActivityIndicator size="large" color="purple" />
-    </View>
+//}
+const ReviewPage = () => {
+   return (
+      <View>
+      <Text>Review</Text>
+      </View>
   );
 }
- 
- return (
-   <View style={styles.container}>
-   <Text style={styles.title}>"wOW"</Text>
-   <FlatList
-     data={this.state.dataSource}
-    ItemSeparatorComponent={this.FlatListItemSeparator}
-    renderItem={item => this.renderItem(item)}
-    keyExtractor={item => item.id.toString()}
-    extraData={this.state}
-   />
+const SearchPage = () =>{
+   return(
+      <View>
+      <Text>Search</Text>
+      </View>
+   );
+}
+const AddSubjectPage = () =>{
+   return(
+      <View>
+      <Text>AddSubject</Text>
+      </View>
+   )
+}
+const Stack = createStackNavigator();
+let today = new Date().toString().slice(0,10);
 
-  <View style={styles.numberBox}>
-    <Text style={styles.number}>{itemNumber}</Text>
-  </View>
-  
-  <TouchableOpacity style={styles.icon}>
-    <View>
-      <Icon
-        raised
-        name="shopping-cart"
-        type="font-awesome"
-        color="#e3e3e3" 
-        size={30} 
-        onPress={() => this.goToStore()}
-        containerStyle={{ backgroundColor: "#FA7B5F" }}
-      />
-    </View>
- </TouchableOpacity>
-</View>
-);}}
+const App = () => {
+ return(
+    <NavigationContainer>
+       <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomeScreen}/>
+          <Stack.Screen name="Menu" component={MenuScreen}/>
+          <Stack.Screen name="Review" component={ReviewPage}/>
+          <Stack.Screen name="Setting" component={ReviewPage}/>
+          <Stack.Screen name="Search" component={SearchPage}/>
+          <Stack.Screen name="AddSubject" component={AddSubjectPage}/>
+       </Stack.Navigator>
+    </NavigationContainer>
+ )
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#192338",
-    paddingVertical: 50,
-    position: "relative"
-   },
-  title: {
-    fontSize: 20,
-    color: "#fff",
-    textAlign: "center",
-    marginBottom: 10
-  },
-  loader: {
-    flex: 1, 
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff"
-  },
-  list: {
-    paddingVertical: 5,
-    margin: 3,
-    flexDirection: "row",
-    backgroundColor: "#192338",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    zIndex: -1
-  },
-  lightText: {
-    color: "#f7f7f7",
-    width: 200,
-    paddingLeft: 15,
-    fontSize: 12
-   },
-  line: {
-    height: 0.5,
-    width: "100%",
-    backgroundColor:"rgba(255,255,255,0.5)"
-  },
-  icon: {
-    position: "absolute",  
-    bottom: 20,
-    width: "100%", 
-    left: 290, 
-    zIndex: 1
-  },
-  numberBox: {
-    position: "absolute",
-    bottom: 75,
-    width: 30,
-    height: 30,
-    borderRadius: 15,  
-    left: 330,
-    zIndex: 3,
-    backgroundColor: "#e3e3e3",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  number: {fontSize: 14,color: "#000"},
-  selected: {backgroundColor: "#FA7B5F"},
-  });
+export default App;
