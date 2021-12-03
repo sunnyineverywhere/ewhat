@@ -98,20 +98,13 @@ const HomeScreen = ({navigation}) =>{
          <TouchableOpacity  onPress={_sortTask} style={viewStyles.btnContainer}>
             <Text style={viewStyles.buttonText}>Sort</Text>
          </TouchableOpacity>
-         {/*<ScrollView width = {width-20}> */}
-      
-           <FlatList
-           data={Object.values(tasks).map(item => (
-            <Task key = {item.id} item={item} deleteTask={_deleteTask} 
-            toggleTask={_toggleTask} updateTask={_updateTask}/>
-            ))}
-           ItemSeparatorComponent=
-           renderItem={item => this.renderItem(item)}
-           keyExtractor={item => item.id.toString()}  
-         />
-           
-           
-      {/*} </ScrollView> */}
+        <ScrollView width = {width-20}>
+            {Object.values(tasks).map(item => (
+               <Task key = {item.id} item={item} deleteTask={_deleteTask} 
+               toggleTask={_toggleTask} updateTask={_updateTask}/>
+           ))} 
+         </ScrollView>
+        
     </SafeAreaView>
    
     
@@ -137,56 +130,57 @@ const MenuScreen = ({navigation}) => {
       </View>
    )
    }
-// const selectionDelete = ({navigation, route})=>{
-//    const [load, setLoad] = useState();
-//    const [data, setData] = useState({});
-//    //data에는 우리가 입력한 Task를 넣어야 한다 => 페이지 넘어갈 때 data로 받음
-//    //이 페이지에선 Tasks가 곧 data라는 뜻이다
-//    const deleteTask = id => {
-//       const currentTasks = Object.assign({}, data);
-//       delete currentTasks[id];
-//       //setTasks(currentTasks);
-//    };
-//    const itemSeperator = () => {
-//       //FlatList의 아이템들의 간격을 설정하는 함수입니다.
-//       return <View style={[viewStyles.btnContainer]}/>
-//    }
-//    const renderItem = (data) =>{
-//       return(
-//          <TouchableOpacity
-//             style={[styles.btnContainer, styles.buttonText]}      
-//             onPress={() => this.selectItem(data)}>
-//             <Text style={styles.lightText}>{data.text} </Text>
-//          </TouchableOpacity>
-//       )
-//    }
-   // const isSelected = (data) => {
-   //    return load? 
-   // }
-   // const selectItem = (data) => {
-   //    setLoad(data);
-   //    setData = data.load ? styles.buttonText : styles.btnContainer;
 
-   // }
-   // return (
-   //    <View>
-   //       <Text>SELECT THE ITEM YOU WANT TO DELETE</Text>
-   //          <FlatList 
-   //          data={Task}
-   //          ItemSeparatorComponent={itemSeperator}
-   //          renderItem={renderItem}
-   //          keyExtractor={(data) => data.id}
-   //          extraData={data}
-   //          />
+const selectionDelete = ({navigation, route})=>{
+   const [load, setLoad] = useState();
+   const [data, setData] = useState({});
+   //data에는 우리가 입력한 Task를 넣어야 한다 => 페이지 넘어갈 때 data로 받음
+   //이 페이지에선 Tasks가 곧 data라는 뜻이다
+   const deleteTask = id => {
+      const currentTasks = Object.assign({}, data);
+      delete currentTasks[id];
+      //setTasks(currentTasks);
+   };
+   const itemSeperator = () => {
+      //FlatList의 아이템들의 간격을 설정하는 함수입니다.
+      return <View style={[viewStyles.btnContainer]}/>
+   }
+   const renderItem = (data) =>{
+      return(
+         <TouchableOpacity
+            style={[styles.btnContainer, styles.buttonText]}      
+            onPress={() => this.selectItem(data)}>
+            <Text style={styles.lightText}>{data.text} </Text>
+         </TouchableOpacity>
+      )
+   }
+   const isSelected = (data) => {
+      return load? 
+   }
+   const selectItem = (data) => {
+      setLoad(data);
+      setData = data.load ? styles.buttonText : styles.btnContainer;
 
-   //       <IconButton type={images.choose} onPressOut= {() => deleteTask()}/>
-   //    </View>
-   // )
+   }
+   return (
+      <View>
+         <Text>SELECT THE ITEM YOU WANT TO DELETE</Text>
+            <FlatList 
+            data={Task}
+            ItemSeparatorComponent={itemSeperator}
+            renderItem={renderItem}
+            keyExtractor={(data) => data.id}
+            extraData={data}
+            />
+
+         <IconButton type={images.choose} onPressOut= {() => deleteTask()}/>
+      </View>
+   )
 
 
 
 
-//}
+}
 const ReviewPage = () => {
    return (
       <View>
