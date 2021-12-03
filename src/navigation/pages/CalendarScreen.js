@@ -5,4 +5,4 @@ function CalendarScreen() {
   return <CalendarView/>;
 }
 
-export default CalendarScreen
+export default CalendarScreen;
