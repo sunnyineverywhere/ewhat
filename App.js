@@ -98,12 +98,11 @@ const HomeScreen = ({navigation}) =>{
          <TouchableOpacity  onPress={_sortTask} style={viewStyles.btnContainer}>
             <Text style={viewStyles.buttonText}>Sort</Text>
          </TouchableOpacity>
-        <ScrollView width = {width-20}>
-            {Object.values(tasks).map(item => (
-               <Task key = {item.id} item={item} deleteTask={_deleteTask} 
-               toggleTask={_toggleTask} updateTask={_updateTask}/>
-           ))} 
-         </ScrollView>
+        <FlatList
+     data={Object.values(tasks)}
+     keyExtractor={(item)=>item?.id}
+     renderItem={({item})=><Task key = {item.id} item={item} deleteTask={_deleteTask} toggleTask={_toggleTask} updateTask={_updateTask}/>}
+     />
         
     </SafeAreaView>
    
