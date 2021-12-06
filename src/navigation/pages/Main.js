@@ -56,9 +56,10 @@ const HomeScreen = ({navigation}) =>{
     return (
     <SafeAreaView style={viewStyles.container}>
        <View style={viewStyles.header}>
-         <Text style ={textStyles.title}>Date: {today}</Text>    
+         <Text style ={textStyles.title}>Date: {today}</Text>
+         <IconButton type={images.deleteAll} onPressOut={_deletAllTask}/>
        </View>
-       <InputTask value={newTask} onChangeText={_handleTextChange}
+       <Input value={newTask} onChangeText={_handleTextChange}
          onSubmitEditing={_addTask} onBlur={_onBlur}/>
 
       <View style={viewStyles.button}>
