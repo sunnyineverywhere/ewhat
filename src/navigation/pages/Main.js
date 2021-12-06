@@ -1,5 +1,5 @@
 import React, { useState, } from 'react';
-import { Text, SafeAreaView,View, Dimensions, Button, FlatList, TouchableOpacity} from 'react-native';
+import { Text, SafeAreaView,View, Button, FlatList, TouchableOpacity} from 'react-native';
 import { viewStyles,textStyles} from '../../components/styles';
 import InputTask from '../../components/Main/Input';
 import Task from '../../components/Main/Task';
@@ -13,7 +13,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
 const HomeScreen = ({navigation}) =>{
-   const width = Dimensions.get('window').width;
+   
    const [newTask, setNewTask] = useState('');
    const [tasks, setTasks] = useState({});
    const _addTask = () =>{
@@ -52,22 +52,21 @@ const HomeScreen = ({navigation}) =>{
    const _onBlur = () => {
       setNewTask('');
    };
+   
+   const Stack = createStackNavigator();
+   let today = new Date().toString().slice(0,10); //show date on header
  
     return (
     <SafeAreaView style={viewStyles.container}>
+       {/* header == Date and Delete All button */}
        <View style={viewStyles.header}>
          <Text style ={textStyles.title}>Date: {today}</Text>
          <IconButton type={images.deleteAll} onPressOut={_deletAllTask}/>
        </View>
+{ /* Input Tasks here */ }
        <Input value={newTask} onChangeText={_handleTextChange}
          onSubmitEditing={_addTask} onBlur={_onBlur}/>
-
-      <View style={viewStyles.button}>
-         <TouchableOpacity  onPress={_deletAllTask}>
-            <Text>Delete All</Text>
-         </TouchableOpacity>
-
-         </View>
+            { /* FlatList == List all Tasks */}
          <FlatList
             data={Object.values(tasks)}
             keyExtractor={(item)=>item.id}
@@ -118,8 +117,7 @@ const CalendarPage = () =>{
    )
 }
 
-const Stack = createStackNavigator();
-let today = new Date().toString().slice(0,10);
+
 
 const Main = () => {
  return(
