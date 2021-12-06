@@ -1,26 +1,27 @@
 import React, { useState, } from 'react';
-import { Text, SafeAreaView,View,FlatList, Dimensions,ScrollView, TouchableOpacity, Pressable} from 'react-native';
+import { Text, SafeAreaView,View, Dimensions, Button, FlatList,ScrollView, TouchableOpacity} from 'react-native';
 import { viewStyles,textStyles} from './styles';
 import Input from './components/Input';
 import Task from './components/Task';
 import IconButton from './components/IconButton';
-import MenuButton from './components/MenuButton';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { images } from './image';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
+import TabBar from './components/TabBar';
 
+//import TabBarItem from './components/TapBarItem';
 
-
-
-const HomeScreen = ({navigation}) =>{
-   const width = Dimensions.get('window').width;
+const HomeScreen = () =>{
+   
    const [isReady, setIsReady] = useState(false);
    const [newTask, setNewTask] = useState('');
    const [tasks, setTasks] = useState({});
+   const [isSelected, setSelected] = useState(false);
 
-   //for saving our tasks
    const _saveTasks = async tasks => {
       try{
          await AsyncStorage.setItem('tasks',JSON.stringify(tasks));
@@ -29,39 +30,34 @@ const HomeScreen = ({navigation}) =>{
          console.error(e);
       }
    }
-   //when we make a task, its id would be the time that it was made
    const _addTask = () =>{
       const ID = Date.now().toString();
       const newTaskObject = {
          [ID]: {id: ID, text: newTask, completed: false, selected: false},
       };
       setNewTask('');
-      //setTasks({...tasks,...newTaskObject});
+      setTasks({...tasks,...newTaskObject});
       _saveTasks({...tasks,...newTaskObject });
    }
-   //when we press the 'trash' button,
    const _deleteTask = id => {
       const currentTasks = Object.assign({}, tasks);
       delete currentTasks[id];
-      //setTasks(currentTasks);
+      setTasks(currentTasks);
       _saveTasks(currentTasks);
    };
-   //we can delete all the tasks once when we press the 'delete all' button
    const _deletAllTask = () => {
       setTasks([]);
   
    };
-   //To show the tasks sorted
    const _sortTask = () => {
       let sortTasks = Object.values(tasks);
       sortTasks.reverse();
       setTasks(sortTasks);    
    };
-   //when we press th 'pencil' button, we can edit our task
    const _toggleTask = id => {
       const currentTasks = Object.assign({}, tasks);
       currentTasks[id]['completed'] = !currentTasks[id]['completed'];
-     // setNewTask(currentTasks);
+     setNewTask(currentTasks);
       _saveTasks(currentTasks);
    };
    const _handleTextChange = text => {
@@ -70,7 +66,7 @@ const HomeScreen = ({navigation}) =>{
    const _updateTask = item => {
       const currentTasks = Object.assign({},tasks);
       currentTasks[item.id] = item;
-      //setTasks(currentTasks);
+      setTasks(currentTasks);
       _saveTasks(currentTasks);
    };
    const _onBlur = () => {
@@ -80,39 +76,42 @@ const HomeScreen = ({navigation}) =>{
       const loadedTasks = await AsyncStorage.getItem('tasks');
       setTasks(JSON.parse(loadedTasks || '{}'));
    };
-  
+   const onPress = () => {
+         alert("deselected")
+      
+   }
+
     return isReady ? (
         
     <SafeAreaView style={viewStyles.container}>
-       {/*for our header, there are date and menu button */}
        <View style={viewStyles.header}>
          <Text style ={textStyles.title}>Date: {today}</Text>
+         <TouchableOpacity  style={viewStyles.buttonText}>
+             <IconButton type={images.deleteAll} onPress={_deletAllTask}/>
          
-         <TouchableOpacity onPress={()=> navigation.navigate('Menu') }>
-         <IconButton type={images.menu} onPressOut= {()=> navigation.navigate('Menu')}/>
          </TouchableOpacity>
-{/*<IconButton type={images.add} onPressOut= {()=> navigation.navigate('AddSubject')}/> */} 
+         
+         
        </View>
-
-{ /* we can add task at this line */}
        <Input value={newTask} onChangeText={_handleTextChange}
          onSubmitEditing={_addTask} onBlur={_onBlur}/> 
-
+<TabBar/>
          
-          <TouchableOpacity  onPress={_deletAllTask} style={viewStyles.btnContainer}>
-             <Text style={viewStyles.buttonText}>Delete All</Text>
-         </TouchableOpacity> 
-{/*<TouchableOpacity  onPress={_sortTask} style={viewStyles.btnContainer}>
+         {/* <TouchableOpacity  onPress={_sortTask} style={viewStyles.btnContainer}>
             <Text style={viewStyles.buttonText}>Sort</Text>
          </TouchableOpacity> */}
-
-{ /* to show the tasks, we use FlatList and align tasks */}
+         
         <FlatList
-     data={Object.values(tasks)}
-     keyExtractor={(item)=>item?.id}
-     renderItem={({item})=><Task key = {item.id} item={item} deleteTask={_deleteTask} toggleTask={_toggleTask} updateTask={_updateTask}/>}
-     />
-        
+            data={Object.values(tasks)}
+            keyExtractor={(item)=>item.id}
+            renderItem={({item})=>(
+            <TouchableOpacity onPress={onPress}>
+            <Task key = {item.id} item={item} deleteTask={_deleteTask} toggleTask={_toggleTask} updateTask={_updateTask}/>
+            </TouchableOpacity>
+            )}
+
+          />
+           
     </SafeAreaView>
    
     
@@ -123,22 +122,11 @@ const HomeScreen = ({navigation}) =>{
          onError={console.error}/>
    );
 }
+const Tab = createBottomTabNavigator();
 
-{/* menuscreen is here */}
-const MenuScreen = ({navigation}) => {
-   
-   return(
-      <View style={textStyles.menuText}>
-            <MenuButton type={images.setting}
-                              onPressOut={()=> navigation.navigate('Setting') }/>
-            <MenuButton type={images.review}
-                        onPressOut={()=> navigation.navigate('Review') }/>
-            <MenuButton type={images.search}
-                        onPressOut={()=> navigation.navigate('Search') }/>
+//const Stack = createStackNavigator();
+let today = new Date().toString().slice(0,10);
 
-      </View>
-   )
-   }
 const ReviewPage = () => {
    return (
       <View>
@@ -153,29 +141,68 @@ const SearchPage = () =>{
       </View>
    );
 }
-const AddSubjectPage = () =>{
+
+const CalanderPage = () =>{
    return(
       <View>
-      <Text>AddSubject</Text>
+      <Text>CalanderPage</Text>
       </View>
    )
 }
-const Stack = createStackNavigator();
-let today = new Date().toString().slice(0,10);
-
 const App = () => {
- return(
-    <NavigationContainer>
-       <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen}/>
-          <Stack.Screen name="Menu" component={MenuScreen}/>
-          <Stack.Screen name="Review" component={ReviewPage}/>
-          <Stack.Screen name="Setting" component={ReviewPage}/>
-          <Stack.Screen name="Search" component={SearchPage}/>
-          <Stack.Screen name="AddSubject" component={AddSubjectPage}/>
-       </Stack.Navigator>
-    </NavigationContainer>
- )
-};
+   return(
+          <NavigationContainer>
+            <Tab.Navigator
+              initialRouteName="Home"
+              screenOptions={{
+                tabBarActiveTintColor: '#224E41',
+                tabBarShowLabel: false,
+              }}>
+            <Tab.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                  title: '홈',
+                  tabBarIcon: ({color, size}) => (
+                    <Icon name="home" color={color} size={size} />
+                  ),
+                }}
+              />
+            <Tab.Screen
+                name="Clandar"
+                component={CalanderPage}
+                options={{
+                  title: '홈',
+                  tabBarIcon: ({color, size}) => (
+                    <Icon name="calendar-today" color={color} size={size} />
+                  ),
+                }}
+              />
+              
+            <Tab.Screen
+                name="Search"
+                component={SearchPage}
+                options={{
+                  title: '검색',
+                  tabBarIcon: ({color, size}) => (
+                    <Icon name="search" color={color} size={size} />
+                  ),
+                }}
+              />
+              <Tab.Screen
+                name="Review"
+                component={ReviewPage}
+                options={{
+                  title: '리뷰',
+                  tabBarIcon: ({color, size}) => (
+                    <Icon name="message" color={color} size={size} />
+                  ),
+                }}
+              />
+            </Tab.Navigator>
+          </NavigationContainer>
+  
+   )
+  };
 
 export default App;
