@@ -7,6 +7,8 @@ import IconButton from '../../components/Main/IconButton';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { images } from '../../components/Main/image';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
 
@@ -29,9 +31,6 @@ const HomeScreen = ({navigation}) =>{
    };
    const _deletAllTask = () => {
       setTasks([]);
-   };
-   const _deleteSelectedTask = () => {
-      const selectedTask = []
    };
    const _sortTasks = () => {
        const sortTask = [...tasks];
@@ -57,15 +56,7 @@ const HomeScreen = ({navigation}) =>{
     return (
     <SafeAreaView style={viewStyles.container}>
        <View style={viewStyles.header}>
-         <Text style ={textStyles.title}>Date: {today}</Text>
-         <TouchableOpacity onPress={()=> navigation.navigate('Menu') }>
-            <Text>
-               menu
-            </Text>
-         </TouchableOpacity>
-         
-         <IconButton type={images.add} onPressOut= {()=> navigation.navigate('AddSubject')}/>
-
+         <Text style ={textStyles.title}>Date: {today}</Text>    
        </View>
        <InputTask value={newTask} onChangeText={_handleTextChange}
          onSubmitEditing={_addTask} onBlur={_onBlur}/>
@@ -73,10 +64,6 @@ const HomeScreen = ({navigation}) =>{
       <View style={viewStyles.button}>
          <TouchableOpacity  onPress={_deletAllTask}>
             <Text>Delete All</Text>
-         </TouchableOpacity>
-
-         <TouchableOpacity onPress={_sortTasks}>
-            <Text>Sort Items</Text>
          </TouchableOpacity>
 
          </View>
@@ -94,21 +81,7 @@ const HomeScreen = ({navigation}) =>{
    )
 }
 
-const MenuScreen = ({navigation}) => {
-   
-   return(
-      <View style={textStyles.menuText}>
-            <MenuButton type={images.setting}
-                              onPressOut={()=> navigation.navigate('Setting') }/>
-            <MenuButton type={images.review}
-                        onPressOut={()=> navigation.navigate('Review') }/>
-            <MenuButton type={images.search}
-                        onPressOut={()=> navigation.navigate('Search') }/>
-
-      </View>
-   )
-}
-
+const Tab = createBottomTabNavigator();
 
 const ReviewPage = () => {
    return (
@@ -132,21 +105,79 @@ const AddSubjectPage = () =>{
       </View>
    )
 }
+
+const CalendarPage = () =>{
+   return(
+      <View>
+      <Text>Calendar</Text>
+      </View>
+   )
+}
+
 const Stack = createStackNavigator();
 let today = new Date().toString().slice(0,10);
 
 const Main = () => {
  return(
-    <NavigationContainer independent={true}>
-       <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen}/>
-          <Stack.Screen name="Menu" component={MenuScreen}/>
-          <Stack.Screen name="Review" component={ReviewPage}/>
-          <Stack.Screen name="Setting" component={ReviewPage}/>
-          <Stack.Screen name="Search" component={SearchPage}/>
-          <Stack.Screen name="AddSubject" component={AddSubjectPage}/>
-       </Stack.Navigator>
-    </NavigationContainer>
+
+   <Tab.Navigator
+     initialRouteName="Home"
+     screenOptions={{
+       tabBarActiveTintColor: '#224E41',
+       tabBarShowLabel: false,
+     }}>
+     <Tab.Screen
+       name="Calendar"
+       component={CalendarPage}
+       options={{
+         title: '캘린더',
+         tabBarIcon: ({color, size}) => (
+           <Icon name="calendar-today" color={color} size={size} />
+         ),
+       }}
+     />
+     <Tab.Screen
+       name="AddSubject"
+       component={AddSubjectPage}
+       options={{
+         title: '과목추가',
+         tabBarIcon: ({color, size}) => (
+           <Icon name="add" color={color} size={size} />
+         ),
+       }}
+     />
+     <Tab.Screen
+       name="Home"
+       component={HomeScreen}
+       options={{
+         title: '홈',
+         tabBarIcon: ({color, size}) => (
+           <Icon name="home" color={color} size={size} />
+         ),
+       }}
+     />
+     <Tab.Screen
+       name="Search"
+       component={SearchPage}
+       options={{
+         title: '검색',
+         tabBarIcon: ({color, size}) => (
+           <Icon name="search" color={color} size={size} />
+         ),
+       }}
+     />
+     <Tab.Screen
+       name="Review"
+       component={ReviewPage}
+       options={{
+         title: '리뷰',
+         tabBarIcon: ({color, size}) => (
+           <Icon name="message" color={color} size={size} />
+         ),
+       }}
+     />
+   </Tab.Navigator>
+
  )
 };
 
