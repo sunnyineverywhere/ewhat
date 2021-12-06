@@ -123,63 +123,56 @@ let today = new Date().toString().slice(0,10);
 
 const Main = () => {
  return(
-
-   <Tab.Navigator
-     initialRouteName="Home"
-     screenOptions={{
-       tabBarActiveTintColor: '#224E41',
-       tabBarShowLabel: false,
-     }}>
-     <Tab.Screen
-       name="Calendar"
-       component={CalendarPage}
-       options={{
-         title: '캘린더',
-         tabBarIcon: ({color, size}) => (
-           <Icon name="calendar-today" color={color} size={size} />
-         ),
-       }}
-     />
-     <Tab.Screen
-       name="AddSubject"
-       component={AddSubjectPage}
-       options={{
-         title: '과목추가',
-         tabBarIcon: ({color, size}) => (
-           <Icon name="add" color={color} size={size} />
-         ),
-       }}
-     />
-     <Tab.Screen
-       name="Home"
-       component={HomeScreen}
-       options={{
-         title: '홈',
-         tabBarIcon: ({color, size}) => (
-           <Icon name="home" color={color} size={size} />
-         ),
-       }}
-     />
-     <Tab.Screen
-       name="Search"
-       component={SearchPage}
-       options={{
-         title: '검색',
-         tabBarIcon: ({color, size}) => (
-           <Icon name="search" color={color} size={size} />
-         ),
-       }}
-     />
-     <Tab.Screen
-       name="Review"
-       component={ReviewPage}
-       options={{
-         title: '리뷰',
-         tabBarIcon: ({color, size}) => (
-           <Icon name="message" color={color} size={size} />
-         ),
-       }}
-     />
+<NavigationContainer>
+            <Tab.Navigator
+              initialRouteName="Home"
+              screenOptions={{
+                tabBarActiveTintColor: '#224E41',
+                tabBarShowLabel: false,
+              }}>
+            <Tab.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                  title: 'Home',
+                  tabBarIcon: ({color, size}) => (
+                    <Icon name="home" color={color} size={size} />
+                  ),
+                }}
+              />
+            <Tab.Screen
+                name="Clandar"
+                component={CalanderPage}
+                options={{
+                  title: 'Calendar',
+                  tabBarIcon: ({color, size}) => (
+                    <Icon name="calendar-today" color={color} size={size} />
+                  ),
+                }}
+              />
+              
+            <Tab.Screen
+                name="Search"
+                component={SearchPage}
+                options={{
+                  title: 'Search',
+                  tabBarIcon: ({color, size}) => (
+                    <Icon name="search" color={color} size={size} />
+                  ),
+                }}
+              />
+              <Tab.Screen
+                name="Review"
+                component={ReviewPage}
+                options={{
+                  title: 'Review',
+                  tabBarIcon: ({color, size}) => (
+                    <Icon name="message" color={color} size={size} />
+                  ),
+                }}
+              />
+            </Tab.Navigator>
+          </NavigationContainer>
    </Tab.Navigator>
 
  )
