@@ -17,9 +17,13 @@ const StackNavigation = () => {
             <Stack.Screen name = "Home" component = {HOME}/>
             <Stack.Screen name = "InputSubject" component = {InputSubject}/>
             <Stack.Screen name = "Main" component={Main}/>
-            <Stack.Screen name = "Calendar" component = {CalendarView} />
+            
         </Stack.Navigator>
     );
 };
 
 export default StackNavigation;
+
+/*
+            <Stack.Screen name = "Calendar" component = {CalendarView} />
+            */

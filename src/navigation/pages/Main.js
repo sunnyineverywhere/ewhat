@@ -1,9 +1,9 @@
 import React, { useState, } from 'react';
 import { Text, SafeAreaView,View, Dimensions, Button, ScrollView, TouchableOpacity} from 'react-native';
 import { viewStyles,textStyles} from '../../components/styles';
-import Input from './components/Input';
-import Task from './components/Task';
-import IconButton from './components/IconButton';
+import InputTask from '../../components/Main/Input';
+import Task from '../../components/Main/Task';
+import IconButton from '../../components/Main/IconButton';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { images } from '../../components/Main/image';
@@ -67,7 +67,7 @@ const HomeScreen = ({navigation}) =>{
          <IconButton type={images.add} onPressOut= {()=> navigation.navigate('AddSubject')}/>
 
        </View>
-       <Input value={newTask} onChangeText={_handleTextChange}
+       <InputTask value={newTask} onChangeText={_handleTextChange}
          onSubmitEditing={_addTask} onBlur={_onBlur}/>
 
       <View style={viewStyles.button}>
@@ -137,7 +137,7 @@ let today = new Date().toString().slice(0,10);
 
 const Main = () => {
  return(
-    <NavigationContainer>
+    <NavigationContainer independent={true}>
        <Stack.Navigator>
           <Stack.Screen name="Home" component={HomeScreen}/>
           <Stack.Screen name="Menu" component={MenuScreen}/>
