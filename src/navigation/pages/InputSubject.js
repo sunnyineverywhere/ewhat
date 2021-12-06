@@ -3,8 +3,8 @@ import styled, {ThemeProvider} from 'styled-components/native'
 import 'react-native-gesture-handler';
 import { Component } from "react";
 import { Button, SafeAreaView, StatusBar, StyleSheet, Text } from "react-native";
-import { startviewStyles } from "../../styles";
-import { theme } from "../../theme";
+import { startviewStyles } from "../../components/styles";
+import { theme } from "../../components/theme";
 import Inputnames from "../../components/Inputnames";
 
 const InputSubject = ({navigation}) => {

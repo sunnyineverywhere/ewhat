@@ -1,9 +1,9 @@
 import React, {useContext} from "react";
 import { StyleSheet } from "react-native";
 import subjectContext, {SubjectConsumer} from "./context/subject";
-import { startviewStyles } from "../styles";
+import { startviewStyles } from "./styles";
 import { Text } from "react-native";
-import { theme } from "../theme";
+import { theme } from "./theme";
 
 const Subject = () => {
     const {subject} = useContext(subjectContext);

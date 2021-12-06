@@ -109,7 +109,6 @@ const MenuScreen = ({navigation}) => {
    )
 }
 
-export default HomeScreen;
 
 const ReviewPage = () => {
    return (
