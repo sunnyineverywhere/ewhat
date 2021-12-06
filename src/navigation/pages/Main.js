@@ -1,5 +1,5 @@
 import React, { useState, } from 'react';
-import { Text, SafeAreaView,View, Dimensions, Button, ScrollView, TouchableOpacity} from 'react-native';
+import { Text, SafeAreaView,View, Dimensions, Button, FlatList, TouchableOpacity} from 'react-native';
 import { viewStyles,textStyles} from '../../components/styles';
 import InputTask from '../../components/Main/Input';
 import Task from '../../components/Main/Task';
@@ -67,13 +67,16 @@ const HomeScreen = ({navigation}) =>{
          </TouchableOpacity>
 
          </View>
-         <ScrollView width = {width-20} >
+         <FlatList
+            data={Object.values(tasks)}
+            keyExtractor={(item)=>item.id}
+            renderItem={({item})=>(
+            <TouchableOpacity onPress={onPress}>
+            <Task key = {item.id} item={item} deleteTask={_deleteTask} toggleTask={_toggleTask} updateTask={_updateTask}/>
+            </TouchableOpacity>
+            )}
 
-            {Object.values(tasks).reverse().map(item => (
-               <Task key = {item.id} item={item} deleteTask={_deleteTask} 
-               toggleTask={_toggleTask} updateTask={_updateTask}/>
-           ))}
-         </ScrollView>
+          />
 
     </SafeAreaView>
    
