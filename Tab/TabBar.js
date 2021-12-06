@@ -1,15 +1,14 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import TabBarItem from './TabBarItem'
+import TabBarItem from './TapBarItem'
 
 const TabBar = ({ setType, type }) => (
     <View style={styles.container}>
-        <TabBarItem type={type} title='All' 
+        <TabBarItem type={type} title='Home' 
             setType={() => setType('All')} />
-        <TabBarItem type={type} border title='Active' 
+        <TabBarItem type={type} border title='AddSubject' 
             setType={() => setType('Active')} />
-        <TabBarItem type={type} border title='Complete' setType={() => 
-            setType('Complete')} />
+        
     </View>
 )
 const styles = StyleSheet.create({
@@ -21,3 +20,4 @@ const styles = StyleSheet.create({
     }
 })
 export default TabBar
+
