@@ -3,7 +3,7 @@ import {StyleSheet, View, Text} from 'react-native';
 import { theme } from '../theme';
 import PropTypes from 'prop-types';
 import IconButton from './IconButton';
-import { images } from '../image';
+import { images } from './image';
 import Input from './Input';
 
 const Task = ({ item, deleteTask, toggleTask, updateTask }) => {

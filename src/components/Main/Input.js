@@ -2,7 +2,7 @@ import React from "react";
 import { Dimensions, StyleSheet, TextInput } from "react-native";
 import {theme} from '../theme';
 
-const Input = ({value, onChangeText, onSubmitEditing, onBlur }) =>{
+const InputTask = ({value, onChangeText, onSubmitEditing, onBlur }) =>{
     return (
         <TextInput style = {inputStyle.textInput}
             placeholder="What to do"
@@ -34,4 +34,4 @@ const inputStyle = StyleSheet.create({
     },
 });
 
-export default Input;
+export default InputTask;
