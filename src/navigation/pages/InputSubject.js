@@ -2,7 +2,7 @@ import React from "react";
 import styled, {ThemeProvider} from 'styled-components/native'
 import 'react-native-gesture-handler';
 import { Component } from "react";
-import { SafeAreaView, StatusBar, StyleSheet, Text } from "react-native";
+import { Button, SafeAreaView, StatusBar, StyleSheet, Text } from "react-native";
 import { startviewStyles } from "../../styles";
 import { theme } from "../../theme";
 import Inputnames from "../../components/Inputnames";
@@ -16,6 +16,7 @@ const InputSubject = ({navigation}) => {
                 />
                 <Title>Input lectures</Title>
                 <Inputnames plaehorder = "+ Add subjects"/>
+                <Button title = "next" onPress = {() => navigation.navigate('Main')} />
             </Container>
         </ThemeProvider>
     );

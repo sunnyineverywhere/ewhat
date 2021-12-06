@@ -3,12 +3,12 @@
 
 import React, { useContext } from 'react';
 import { TextInput } from 'react-native-gesture-handler';
-import subjectContext from './context/subject';
+import SubjectContext from './context/subject';
 import { useState } from 'react';
 
-const Input = () => {
+const SubjectInput = () => {
     const [count, setcount] = useState(0);
-    const {dispatch} = useContext(subjectContext);
+    const {dispatch} = useContext(SubjectContext);
 
     return(
         <TextInput 
@@ -27,4 +27,4 @@ const Input = () => {
     )
 }
 
-export default Input;
+export default SubjectInput;

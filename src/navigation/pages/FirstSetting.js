@@ -1,24 +1,24 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import subjectContext from "../../components/context/subject";
-import { subjectProvider } from "../../components/context/subject";
+import SubjectContext from "../../components/context/subject";
+import { SubjectProvider } from "../../components/context/subject";
 import Subject from "../../components/subject";
-import Input from "../../components/AddSubject";
+import SubjectInput from "../../components/AddSubject";
 import { View } from "react-native";
 import { Button } from "react-native";
 
 const FirstSetting = ({navigation}) => {
     return (
-        <subjectProvider>
+        <SubjectProvider>
             <View style={FSstyles.view}>
                 
                     <Subject />
-                    <Input />
+                    <SubjectInput />
                     <Button 
             title = "next"
             onPress = {() => navigation.navigate('InputSubject')} />
             </View>
-            </subjectProvider>   
+            </SubjectProvider>   
 
     )
 }

@@ -4,19 +4,19 @@
 
 import React, {createContext, Component, useState} from "react";
 
-const subjectContext = createContext({
+const SubjectContext = createContext({
     subject: {number: 6},
     dispatch: () => {},
 });
 
-const subjectProvider = ({children}) => {
+const SubjectProvider = ({children}) => {
     const [count, setcount] = useState(0);
 
     const value = {subject: {count}, dispatch: setcount};
-    return <subjectContext.Provider value = {value}>{children}</subjectContext.Provider>
+    return <SubjectContext.Provider value = {value}>{children}</SubjectContext.Provider>
 };
 
-const subjectConsumer = subjectContext.Consumer;
+const SubjectConsumer = SubjectContext.Consumer;
 
-export {subjectConsumer, subjectProvider};
-export default subjectContext;
+export {SubjectConsumer, SubjectProvider};
+export default SubjectContext;
