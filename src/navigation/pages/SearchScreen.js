@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import SearchContext from '../../../components/contexts/SearchContext';
-import EmptySearchResult from '../../../SearchSreen/components/EmptySearchResult';
+import EmptySearchResult from '../../../SearchScreen/components/EmptySearchResult';
 
 function SearchScreen({navigation}) {
   const {keyword} = useContext(SearchContext);
