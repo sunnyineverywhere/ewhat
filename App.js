@@ -20,7 +20,7 @@ const HomeScreen = ({navigation}) =>{
    const [newTask, setNewTask] = useState('');
    const [tasks, setTasks] = useState({});
 
-
+   //for saving our tasks
    const _saveTasks = async tasks => {
       try{
          await AsyncStorage.setItem('tasks',JSON.stringify(tasks));
@@ -29,6 +29,7 @@ const HomeScreen = ({navigation}) =>{
          console.error(e);
       }
    }
+   //when we make a task, its id would be the time that it was made
    const _addTask = () =>{
       const ID = Date.now().toString();
       const newTaskObject = {
@@ -38,21 +39,25 @@ const HomeScreen = ({navigation}) =>{
       //setTasks({...tasks,...newTaskObject});
       _saveTasks({...tasks,...newTaskObject });
    }
+   //when we press the 'trash' button,
    const _deleteTask = id => {
       const currentTasks = Object.assign({}, tasks);
       delete currentTasks[id];
       //setTasks(currentTasks);
       _saveTasks(currentTasks);
    };
+   //we can delete all the tasks once when we press the 'delete all' button
    const _deletAllTask = () => {
       setTasks([]);
   
    };
+   //To show the tasks sorted
    const _sortTask = () => {
       let sortTasks = Object.values(tasks);
       sortTasks.reverse();
       setTasks(sortTasks);    
    };
+   //when we press th 'pencil' button, we can edit our task
    const _toggleTask = id => {
       const currentTasks = Object.assign({}, tasks);
       currentTasks[id]['completed'] = !currentTasks[id]['completed'];
@@ -79,25 +84,29 @@ const HomeScreen = ({navigation}) =>{
     return isReady ? (
         
     <SafeAreaView style={viewStyles.container}>
+       {/*for our header, there are date and menu button */}
        <View style={viewStyles.header}>
          <Text style ={textStyles.title}>Date: {today}</Text>
-         <View style={viewStyles.btnContainer}>
+         
          <TouchableOpacity onPress={()=> navigation.navigate('Menu') }>
          <IconButton type={images.menu} onPressOut= {()=> navigation.navigate('Menu')}/>
          </TouchableOpacity>
-         <IconButton type={images.add} onPressOut= {()=> navigation.navigate('AddSubject')}/>
-         </View>
+{/*<IconButton type={images.add} onPressOut= {()=> navigation.navigate('AddSubject')}/> */} 
        </View>
+
+{ /* we can add task at this line */}
        <Input value={newTask} onChangeText={_handleTextChange}
          onSubmitEditing={_addTask} onBlur={_onBlur}/> 
 
-      
-         <TouchableOpacity  onPress={_deletAllTask} style={viewStyles.btnContainer}>
-            <Text style={viewStyles.buttonText}>Delete All</Text>
-         </TouchableOpacity>
-         <TouchableOpacity  onPress={_sortTask} style={viewStyles.btnContainer}>
+         
+          <TouchableOpacity  onPress={_deletAllTask} style={viewStyles.btnContainer}>
+             <Text style={viewStyles.buttonText}>Delete All</Text>
+         </TouchableOpacity> 
+{/*<TouchableOpacity  onPress={_sortTask} style={viewStyles.btnContainer}>
             <Text style={viewStyles.buttonText}>Sort</Text>
-         </TouchableOpacity>
+         </TouchableOpacity> */}
+
+{ /* to show the tasks, we use FlatList and align tasks */}
         <FlatList
      data={Object.values(tasks)}
      keyExtractor={(item)=>item?.id}
@@ -115,6 +124,7 @@ const HomeScreen = ({navigation}) =>{
    );
 }
 
+{/* menuscreen is here */}
 const MenuScreen = ({navigation}) => {
    
    return(
@@ -129,57 +139,6 @@ const MenuScreen = ({navigation}) => {
       </View>
    )
    }
-
-const selectionDelete = ({navigation, route})=>{
-   const [load, setLoad] = useState();
-   const [data, setData] = useState({});
-   //data에는 우리가 입력한 Task를 넣어야 한다 => 페이지 넘어갈 때 data로 받음
-   //이 페이지에선 Tasks가 곧 data라는 뜻이다
-   const deleteTask = id => {
-      const currentTasks = Object.assign({}, data);
-      delete currentTasks[id];
-      //setTasks(currentTasks);
-   };
-   const itemSeperator = () => {
-      //FlatList의 아이템들의 간격을 설정하는 함수입니다.
-      return <View style={[viewStyles.btnContainer]}/>
-   }
-   const renderItem = (data) =>{
-      return(
-         <TouchableOpacity
-            style={[styles.btnContainer, styles.buttonText]}      
-            onPress={() => this.selectItem(data)}>
-            <Text style={styles.lightText}>{data.text} </Text>
-         </TouchableOpacity>
-      )
-   }
-   const isSelected = (data) => {
-      return load? 
-   }
-   const selectItem = (data) => {
-      setLoad(data);
-      setData = data.load ? styles.buttonText : styles.btnContainer;
-
-   }
-   return (
-      <View>
-         <Text>SELECT THE ITEM YOU WANT TO DELETE</Text>
-            <FlatList 
-            data={Task}
-            ItemSeparatorComponent={itemSeperator}
-            renderItem={renderItem}
-            keyExtractor={(data) => data.id}
-            extraData={data}
-            />
-
-         <IconButton type={images.choose} onPressOut= {() => deleteTask()}/>
-      </View>
-   )
-
-
-
-
-}
 const ReviewPage = () => {
    return (
       <View>
