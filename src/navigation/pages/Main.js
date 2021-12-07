@@ -30,7 +30,22 @@ const HomeScreen = ({navigation}) =>{
       setTasks(currentTasks);
    };
    const _deletAllTask = () => {
-      setTasks([]);
+      Alert.alert(
+       'DELETE ALL',
+       'Are You Sure?',
+       [
+         {text:'cancel', onPress:()=>{},styl:'cancel'},
+         {text:'Sure', onPress:()=>{
+           setTasks([]);
+         },
+          style: 'destructive',
+        },
+      ],
+      {
+        cancelable: true,
+        onDismiss: () => {},
+      },
+    ); 
    };
    const _sortTasks = () => {
        const sortTask = [...tasks];
