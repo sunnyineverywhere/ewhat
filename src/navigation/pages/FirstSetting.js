@@ -32,10 +32,10 @@ const FSstyles = StyleSheet.create({
         paddingHorizontal: 24,
         borderRadius: 0,
         elevation: 3,
-        backgroundcolor: '#FDFFFD',
+        backgroundColor: '#FDFFFD',
     },
     text: {
-        fontsize: 40,
+        fontSize: 40,
         lineHeight: 14,
         fontWeight: 'bold',
         letterSpacing: 0.25,
