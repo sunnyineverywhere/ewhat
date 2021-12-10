@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, StatusBar, AppState} from 'react-native';
-import TodoList from './layout/todolist';
-import AppTitleHeader from './component/AppTitleHeader';
+/*import TodoList from './layout/todolist';*/
+import AppTitleHeader from './src/components/AppTitleHeader';
 import AsyncStorage from '@react-native-community/async-storage';
 import uuid from 'uuid/v1';
 import moment from 'moment';
