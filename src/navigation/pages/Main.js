@@ -1,11 +1,11 @@
 import React, { useState,useContext,createContext} from 'react';
 import {TextInput, Text, SafeAreaView, useWindowDimensions, View,FlatList,TouchableOpacity, Alert} from 'react-native';
-import { viewStyles,textStyles} from './styles';
-import Input from './components/Input';
-import Task from './components/Task';
-import IconButton from './components/IconButton';
+import { viewStyles, textStyles } from '../../components/styles';
+import InputTask from '../../components/Main/Input';
+import Task from '../../components/Main/Task'
+import IconButton from '../../components/Main/IconButton';
 import { NavigationContainer } from '@react-navigation/native';
-import { images } from './image';
+import { images } from '../../components/Main/image';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
