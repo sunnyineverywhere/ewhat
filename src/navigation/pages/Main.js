@@ -171,7 +171,6 @@ const Main = () => {
               />
             </Tab.Navigator>
           </NavigationContainer>
-   </Tab.Navigator>
 
  )
 };

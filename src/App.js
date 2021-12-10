@@ -5,7 +5,7 @@ import StackNavigation from "./navigation/Stack";
 const App = () => {
     return(
         
-        <NavigationContainer>
+        <NavigationContainer independent={true}>
             <StackNavigation />
         </NavigationContainer>
     )

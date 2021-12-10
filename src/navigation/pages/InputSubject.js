@@ -7,6 +7,7 @@ import { startviewStyles } from "../../components/styles";
 import { theme } from "../../components/theme";
 import Inputnames from "../../components/Inputnames";
 
+
 const InputSubject = ({navigation}) => {
     return(
         <ThemeProvider theme = {theme}>
