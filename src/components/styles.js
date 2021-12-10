@@ -24,6 +24,25 @@ export const viewStyles = StyleSheet.create({
     },
     header:{
         flexDirection: 'row',
+    },
+     complete: {
+        width: 60,
+        height: 60,
+        alignItems: 'center',
+        justifyContent: "center",
+        backgroundColor: theme.itemBackground,
+        marginHorizontal:166,
+        marginVertical: 22,
+        borderRadius: 55
+        
+    },
+    doneListText:{
+        textAlign: 'center',
+        marginVertical: 2,
+        marginHorizontal: 3,
+        fontSize: 20,
+        fontWeight: '600',
+        color: 'black',
     }
 });
 export const textStyles = StyleSheet.create({
