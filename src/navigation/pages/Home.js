@@ -12,7 +12,7 @@ const HOME = ({navigation}) => {
             <Button 
             title = "init"
             color = "#224E41"
-            onPress = {() => navigation.navigate('InputSubject')} />
+            onPress = {() => navigation.navigate('Main')} />
         </SafeAreaView>
     );
 };

@@ -13,7 +13,6 @@ const StackNavigation = () => {
     return(
         <Stack.Navigator initialRouteName = "Home">
             <Stack.Screen name = "Home" component = {HOME}/>
-            <Stack.Screen name = "InputSubject" component = {InputSubject}/>
             <Stack.Screen name = "Main" component={Main}/>
             
         </Stack.Navigator>

@@ -17,7 +17,7 @@ const InputSubject = ({navigation}) => {
                 />
                 <Title>Input lectures</Title>
                 <Inputnames plaehorder = "+ Add subjects"/>
-                <Button title = "next" onPress = {() => navigation.navigate('Main')} />
+              
             </Container>
         </ThemeProvider>
     );

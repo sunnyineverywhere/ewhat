@@ -12,7 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
 import InputSubject from './InputSubject';
 import { Input } from 'react-native-elements/dist/input/Input';
-
+import Calendars from './Calendar';
 
 
 const HomeScreen = ({navigation}) =>{
@@ -237,11 +237,10 @@ const SearchPage = () =>{
 
 const CalanderPage = () =>{
    return(
-      <View>
-      <Text>CalanderPage</Text>
-      </View>
+      <Calendars />
    )
 }
+
 const Main = () => {
    return(
           <NavigationContainer independent = {true}>
@@ -262,7 +261,7 @@ const Main = () => {
                 }}
               />
             <Tab.Screen
-                name="Clandar"
+                name="Calendar"
                 component={CalanderPage}
                 options={{
                   title: 'Calendar',
