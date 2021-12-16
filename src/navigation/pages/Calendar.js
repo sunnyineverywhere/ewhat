@@ -9,7 +9,7 @@ LocaleConfig.locales['fr'] = {
     monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
     monthNamesShort: ['Janv.','Févr.','Mars','Avril','Mai','Juin','Juil.','Août','Sept.','Oct.','Nov.','Déc.'],
     dayNames: ['일요일','월요일', '화요일','수요일','목요일','금요일','토요일'],
-    dayNamesShort: ['일', '월','화','수','목','금','토'],
+    dayNamesShort: ['SUN', 'MON','THU','WED','TUR','FRI','SAT'],
     today: 'Aujourd\'hui'
   };
   LocaleConfig.defaultLocale = 'fr';
