@@ -5,10 +5,23 @@ import { Component } from "react";
 import { Button, SafeAreaView, StatusBar, StyleSheet, Text } from "react-native";
 import { startviewStyles } from "../../components/styles";
 import { theme } from "../../components/theme";
-import Inputnames from "../../components/Inputnames";
+import Inputs from "../../components/SubjectInput/Inputnames";
+
+import { useState } from "react";
 
 
 const InputSubject = ({navigation}) => {
+    const [newTask, setNewTask] = useState('');
+
+    const _addTask = () => {
+        alert(`Add: &{newTask}`);
+        setNewTask('');
+    }
+
+    const _handleTextChange = text => {
+        setNewTask(text);
+    }
+
     return(
         <ThemeProvider theme = {theme}>
             <Container>
@@ -16,7 +29,11 @@ const InputSubject = ({navigation}) => {
                     barStyle='light-content'     
                 />
                 <Title>Input lectures</Title>
-                <Inputnames plaehorder = "+ Add subjects"/>
+                <Inputs 
+                    placeholder = "+ Add subjects"
+                    value = {newTask}
+                    onChangeTest = {_handleTextChange}
+                    onSubmitEditing = {_addTask}/>
               
             </Container>
         </ThemeProvider>
