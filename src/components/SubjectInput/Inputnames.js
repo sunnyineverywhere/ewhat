@@ -18,30 +18,33 @@ const StyledInput = styled.TextInput`
     color: #035A15;
 `
 
-const Inputs = ({placeholder, value, onChangeText, onSubmitEditing}) => {
+const Inputs = ({placeholder, value, onChangeText, onSubmitEditing, onBlur}) => {
     const width = useWindowDimensions.width;
-
+    
     return (
-        <StyledInput 
-            width = {width} 
-            placeholder = {placeholder} 
-            maxLength = {50}
-            autoCapitalize = "none"
-            autoCorrect = "false"
-            returnKeyType = "done"
-            keyboardAppearance="dark"
-            value = {value}
-            onChangeText = {onChangeText}
-            onSubmitEditing = {onSubmitEditing}/>
-        );
+        <StyledInput
+        width={width}
+        placeholder={placeholder}
+        maxLength={50}
+        autoCapitalize="none"
+        autoCorrect={false}
+        returnKeyType="done"
+        keyboardAppearance="dark" // iOS only
+        value={value}
+        onChangeText={onChangeText}
+        onSubmitEditing={onSubmitEditing}
+        onBlur={onBlur}
+      />
+    );
 };
 
-Input.PropsTypes = {
+Inputs.prototype = {
     placeholder: PropsTypes.string,
     value: PropsTypes.string.isRequired,
     onChangeText: PropsTypes.func.isRequired,
     onSubmitEditing: PropsTypes.func.isRequired,
-};
+    onBlur: PropsTypes.func.isRequired,
+}
 
 
 export default Inputs;
