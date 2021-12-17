@@ -1,9 +1,9 @@
 import React, {useContext} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import SearchHeader from '../../components/SearchScreen/SearchHeader';
+import {StyleSheet, View} from 'react-native';
 import EmptySearchResult from '../../components/SearchScreen/EmptySearchResult';
 import SearchContext from '../../components/context/SearchContext';
 import LogContext from '../../components/context/LogContext';
+import SearchList from '../../components/SearchScreen/SearchList'
 
 
 function SearchScreen({navigation}) {
