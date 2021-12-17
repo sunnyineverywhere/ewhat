@@ -10,6 +10,7 @@ export function SearchContextProvider({children}) {
             {children}
         </SearchContext.Provider>
     );
+    
 }
 
 export default SearchContext;

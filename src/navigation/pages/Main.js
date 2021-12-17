@@ -13,6 +13,7 @@ import AppLoading from 'expo-app-loading';
 import InputSubject from './InputSubject';
 import { Input } from 'react-native-elements/dist/input/Input';
 import Calendars from './Calendar';
+import SearchScreen from './SearchScreen';
 
 
 const HomeScreen = ({navigation}) =>{
@@ -282,7 +283,7 @@ const Main = () => {
               />
             <Tab.Screen
                 name="Search"
-                component={SearchPage}
+                component={SearchScreen}
                 options={{
                   title: 'Search',
                   tabBarIcon: ({color, size}) => (

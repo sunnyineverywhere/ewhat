@@ -1,10 +1,11 @@
 import React, {useContext} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import SearchContext from '../../../components/contexts/SearchContext';
-import EmptySearchResult from '../../../components/SearchScreen/EmptySearchResult';
+import SearchHeader from '../../components/SearchScreen/SearchHeader';
+import EmptySearchResult from '../../components/SearchScreen/EmptySearchResult';
+import SearchContext from '../../components/context/SearchContext';
 
 function SearchScreen({navigation}) {
-  const {keyword} = useContext(SearchContext);
+  const keyword = useContext(SearchContext);
 
   if (keyword === ''){
     return <EmptySearchResult type="EMPTY_KEYWORD" />;
