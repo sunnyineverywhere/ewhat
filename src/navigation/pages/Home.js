@@ -11,7 +11,8 @@ const HOME = ({navigation}) => {
             <Text style = {startviewStyles.startTitle}>Please-attendence</Text>
             <Button 
             title = "init"
-            onPress = {() => navigation.navigate('FirstSetting')} />
+            color = "#224E41"
+            onPress = {() => navigation.navigate('Main')} />
         </SafeAreaView>
     );
 };

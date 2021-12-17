@@ -4,14 +4,14 @@ import { theme } from "./theme";
 export const startviewStyles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: theme.backgrond,
+        backgroundColor: theme.dark,
         alignItems:'center',
         justifyContent: 'center'
     },
     startTitle: {
         fontSize: 60,
         fontWeight: '800',
-        color: theme.main,
+        color: theme.color1,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -24,6 +24,25 @@ export const viewStyles = StyleSheet.create({
     },
     header:{
         flexDirection: 'row',
+    },
+     complete: {
+        width: 60,
+        height: 60,
+        alignItems: 'center',
+        justifyContent: "center",
+        backgroundColor: theme.itemBackground,
+        marginHorizontal:166,
+        marginVertical: 22,
+        borderRadius: 55
+        
+    },
+    doneListText:{
+        textAlign: 'center',
+        marginVertical: 2,
+        marginHorizontal: 3,
+        fontSize: 20,
+        fontWeight: '600',
+        color: 'black',
     }
 });
 export const textStyles = StyleSheet.create({

@@ -7,7 +7,7 @@ import Review from '../assets/writing.png'
 import Add from '../assets/outline_add_black_18.png'
 import Setting from '../assets/outline_settings_black_18.png'
 import Search from '../assets/outline_search_black_18.png'
-
+import Choose from '../assets/select.png'
 export const images = {
     uncompleted: basicState,
     completed: checkState,
@@ -19,4 +19,5 @@ export const images = {
     add : Add,
     setting : Setting,
     search : Search,
+    choose : Choose,
 };
