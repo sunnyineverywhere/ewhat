@@ -3,6 +3,7 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import SearchListItem from './SearchListItem';
 
 function SearchList({logs, onScrolledToBottom, ListHeaderComponent}) {
+  
   const onScroll = e => {
     if (!onScrolledToBottom) {
       return;
