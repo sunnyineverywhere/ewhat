@@ -5,6 +5,7 @@ import {ko} from 'date-fns/locale';
 import {useNavigation} from '@react-navigation/native';
 
 function formatDate(date) {
+  
   const d = new Date(date);
   const now = Date.now();
   const diff = (now - d.getTime()) / 1000;
