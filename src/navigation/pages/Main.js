@@ -313,27 +313,7 @@ const AddSubjectPage = () =>{
 
 }
 */
-const ReviewPage = ({route, navigation}) => {
-  const {itemId} = route.params;
-  
-   return (
-      <View style={{ flex: 1, alignItems:'center',justifyContent:'center'}}>
-       <FlatList
-         data={Object.values(itemId)}
-         keyExtractor={(item)=>item.id}
-         renderItem={({item})=>(
-           item.completed ? (
-           <Text style={viewStyles.doneListText}>
-             {item.text}
-           </Text>
-           ):(
-           null
-         ))
-           }
-         />         
-      </View>
-  );
-}
+
 const SearchPage = () =>{
    return(
       <View>
