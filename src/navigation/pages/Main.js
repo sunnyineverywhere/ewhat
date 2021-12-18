@@ -4,7 +4,6 @@ import { viewStyles, textStyles } from '../../components/styles';
 import InputTask from '../../components/Main/Input';
 import Task from '../../components/Main/Task'
 import IconButton from '../../components/Main/IconButton';
-import AppTitleHeader from '../../components/AppTitleHeader';
 import ExpiredTodo from '../../components/ExpiredTodo';
 import { NavigationContainer } from '@react-navigation/native';
 import { images } from '../../components/Main/image';
