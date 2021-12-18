@@ -2,7 +2,7 @@ import {format} from 'date-fns';
 import React ,{useContext, useMemo, useState} from 'react';
 import CalendarView from '../../components/CalendarView';
 import LogContext from  '../../components/context/LogContext';
-import SearchList from '../../components/Searchsceen/SearchList';
+import SearchList from '../../components/SearchSceen/SearchList';
 
 function Calendars() {
   const {logs} = useContext(LogContext);
