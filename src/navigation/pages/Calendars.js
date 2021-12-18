@@ -5,6 +5,7 @@ import LogContext from  '../../components/context/LogContext';
 import SearchList from '../../components/SearchScreen/SearchList';
 
 function Calendars() {
+  /**
   const {logs} = useContext(LogContext);
   const [selectedDate, setSelectedDate] = useState(
     format(new Date(), 'yyyy-MM-dd'),
@@ -23,18 +24,19 @@ function Calendars() {
   const filteredLogs = logs.filter(
     log => format(new Date(log.date), 'yyyy-MM-dd') === selectedDate,
   );
-
+**/
+  
   return (
-    <SearchList
-      logs={filteredLogs}
-      ListHeaderComponent={
+    //<SearchList
+     // logs={filteredLogs}
+      //ListHeaderComponent={
         <CalendarView
           markedDates={markedDates}
           selectedDate={selectedDate}
           onSelectDate={setSelectedDate}
         />
-      }
-    />
+     // }
+  //  />
   );
 }
 
