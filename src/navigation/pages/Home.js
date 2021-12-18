@@ -8,7 +8,7 @@ import { startviewStyles } from "../../components/styles";
 const HOME = ({navigation}) => {
     return(
         <SafeAreaView style = {startviewStyles.container}>
-            <Text style = {startviewStyles.startTitle}>Please-attendence</Text>
+            <Text style = {startviewStyles.startTitle}>EWHAT</Text>
             <Button 
             title = "init"
             color = "#224E41"
