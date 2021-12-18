@@ -16,6 +16,7 @@ import TodoList from '../../components/layout/todolist';
 import TodoDetailView from '../../components/layout/TodoDetailView';
 import Calendars from './Calendars';
 
+
 const Tab = createBottomTabNavigator();
 
 class HomeScreen extends React.Component {
@@ -261,52 +262,6 @@ class HomeScreen extends React.Component {
 }
 
 
-/*
-const AddSubjectPage = () =>{
-  const [count, setcount] = useState(0);
-  const Subject = () => {
-  const {subject} = useContext(SubjectContext);
-  return <Text>Number: {subject.number}</Text>;
-}
-  const SubjectContext = createContext({
-    subject: {number: 6},
-    dispatch: () => {},
-});
-  const SubjectProvider = ({children}) => {
-  const [count, setcount] = useState(0);
-
-  const value = {subject: {count}, dispatch: setcount};
-  return <SubjectContext.Provider value = {value}>{children}</SubjectContext.Provider>
-};
-  const SubjectConsumer = SubjectContext.Consumer;
-  const {dispatch} = useContext(SubjectContext);
-  return (
-    <TextInput 
-          value = {count}
-          onChangeText = {text => setcount(text)}
-          onSubmitEditing = {() => {
-              dispatch(count);
-              setcount();
-          }}
-          placeholder = "How many lectures do you take?"
-          autoCapitalize = "none"
-          autoCorrect = {false}
-          returnKeyType = "done"
-          keyboardType = "number-pad"
-      />
-  );
-
-//   //
-
-
-// const Inputnames = () => {
-//     const width = useWindowDimensions.width;
-//     return <StyledInput width = {width} placeholder = {placeholder} maxLength = {50}/>;
-// }
-
-}
-*/
-
 const SearchPage = () =>{
    return(
       <View>
@@ -393,15 +348,3 @@ const styles = StyleSheet.create({
 });
 export default Main;
 
-/*
-<Tab.Screen
-name="Review"
-component={ReviewPage}
-options={{
-  title: 'Review',
-  tabBarIcon: ({color, size}) => (
-    <Icon name="message" color={color} size={size} />
-  ),
-}}
-/>
-*/
