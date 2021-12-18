@@ -1,7 +1,6 @@
 import React, { useState,useContext,createContext} from 'react';
 import {Stylesheet, TextInput, Text, SafeAreaView, useWindowDimensions, View,FlatList,TouchableOpacity, Alert} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { images } from '../../components/Main/image';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -302,16 +301,6 @@ const Main = () => {
                   title: 'Calendar',
                   tabBarIcon: ({color, size}) => (
                     <Icon name="calendar-today" color={color} size={size} />
-                  ),
-                }}
-              />
-              <Tab.Screen
-                name="AddSub"
-                component={InputSubject}
-                options={{
-                  title: 'Add Subject',
-                  tabBarIcon: ({color, size}) => (
-                    <Icon name="subject" color={color} size={size} />
                   ),
                 }}
               />
