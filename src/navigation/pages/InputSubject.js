@@ -8,10 +8,11 @@ import { useState } from "react";
 import IconButton from "../../components/Main/IconButton";
 import { Icon } from "react-native-elements";
 import { images } from "../../components/Main/image";
-import Inputs from "../../components/SubjectInput/Inputnames";
+import Inputs from "../../components/SubjectInput/Inputs";
 import SubjectTask from "../../components/SubjectInput/Task";
 import AppLoading from "expo-app-loading";
 import { AsyncStorage } from "react-native";
+import { View } from "react-native";
 
 const List = styled.ScrollView`
     flex: 1;
@@ -69,8 +70,7 @@ const InputSubject = ({navigation}) => {
         setNewTask('');
       };
     return isReady ? (
-        <ThemeProvider theme = {theme}>
-            <Container>
+        <View>
                 <StatusBar 
                     barStyle='light-content'     
                 />
@@ -91,8 +91,7 @@ const InputSubject = ({navigation}) => {
                         updateTask={_updateTask} />
                     ))}
                 </List>
-            </Container>
-        </ThemeProvider>
+            </View>
     ) : (
         <AppLoading 
         startAsync={_loadTasks}
@@ -101,11 +100,8 @@ const InputSubject = ({navigation}) => {
     );
 };
 
-const Container = styled.View`
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-`;
+
+
 
 const Title = styled.Text`
     font-size: 40px;

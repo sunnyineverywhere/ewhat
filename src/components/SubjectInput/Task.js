@@ -4,18 +4,12 @@ import PropTypes from 'prop-types'
 import IconButton from "../Main/IconButton";
 import { images } from "../Main/image";
 import { theme } from "../theme";
-import Inputs from "./Inputnames";
 import { InputAccessoryView } from "react-native";
 import { useState } from "react";
+import Inputs from './Inputs'
+import { View } from "react-native";
 
-const Container = styled.View`
-    flex-direction: row;
-    align-items: center;
-    background-color: ${({theme}) => theme.itemBackground};
-    border-radius: 10px;
-    padding: 5px;
-    margin: 3px 0px;
-`;
+
 
 const Contents = styled.Text`
     flex: 1;
@@ -52,7 +46,7 @@ const SubjectTask= ({ item, deleteTask, toggleTask, updateTask }) => {
         onBlur={_onBlur}
       />
     ) : (
-      <Container>
+      <View>
         <IconButton
           type={item.completed ? images.completed : images.uncompleted}
           id={item.id}
@@ -72,7 +66,7 @@ const SubjectTask= ({ item, deleteTask, toggleTask, updateTask }) => {
           onPressOut={deleteTask}
           completed={item.completed}
         />
-      </Container>
+      </View>
     );
   };
 

@@ -7,7 +7,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
 import InputSubject from './InputSubject';
-import Calendars from './Calendars';
 import SearchScreen from './SearchScreen';
 import moment from 'moment';
 import { StyleSheet } from 'react-native';
@@ -15,7 +14,7 @@ import { AppState } from 'react-native';
 import { StatusBar } from 'react-native';
 import TodoList from '../../components/layout/todolist';
 import TodoDetailView from '../../components/layout/TodoDetailView';
-import CalendarScreens from './Calendar'
+import Calendars from './Calendars';
 
 const Tab = createBottomTabNavigator();
 
@@ -318,7 +317,7 @@ const SearchPage = () =>{
 
 const CalanderPage = () =>{
    return(
-      <CalendarScreens />
+      <Calendars />
    )
 }
 
@@ -343,7 +342,7 @@ const Main = () => {
               />
             <Tab.Screen
                 name="Calendar"
-                component={CalendarScreens}
+                component={Calendars}
                 options={{
                   title: 'Calendar',
                   tabBarIcon: ({color, size}) => (

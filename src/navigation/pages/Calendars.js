@@ -1,13 +1,8 @@
 import {format} from 'date-fns';
 import React ,{useContext, useMemo, useState} from 'react';
 import CalendarView from '../../components/CalendarView';
-<<<<<<< HEAD:src/navigation/pages/Calendar.js
-import LogContext from '../../components/context/LogContext'
-import SearchContext from '../../components/context/SearchContext';
-=======
 import LogContext from  '../../components/context/LogContext';
-import SearchList from '../../components/SearchSceen/SearchList';
->>>>>>> 2b96549b428ced7fe952e230abc0a01915c981a4:src/navigation/pages/Calendars.js
+import SearchList from '../../components/SearchScreen/SearchList';
 
 function Calendars() {
   const {logs} = useContext(LogContext);
@@ -43,4 +38,4 @@ function Calendars() {
   );
 }
 
-export default CalendarScreen;
+export default Calendars;
