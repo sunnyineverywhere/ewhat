@@ -4,7 +4,7 @@ import CalendarView from '../../components/CalendarView';
 import LogContext from  '../../components/context/LogContext';
 import SearchList from '../../components/Searchsceen/SearchList';
 
-function CalendarScreen() {
+function Calendars() {
   const {logs} = useContext(LogContext);
   const [selectedDate, setSelectedDate] = useState(
     format(new Date(), 'yyyy-MM-dd'),
