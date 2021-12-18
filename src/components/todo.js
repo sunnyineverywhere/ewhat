@@ -112,6 +112,7 @@ export default class Todo extends React.Component {
               changeDescriptionText={this.props.changeDescriptionText}
               changePriority={this.props.changePriority}
               changeDueDate={this.props.changeDueDate}
+              changeType = {this.props.changeType}
             />
           </View>
         ) : (

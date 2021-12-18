@@ -10,8 +10,13 @@ import {
 } from 'react-native';
 import {Icon} from 'react-native-elements';
 import {Calendar} from 'react-native-calendars';
+import { useState } from 'react';
+
 
 export default class TodoDetailView extends React.Component {
+  
+  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -47,6 +52,10 @@ export default class TodoDetailView extends React.Component {
     };
     this.setState({dueDateMark: newMark});
   };
+
+  _selectType = type => {
+    const [Type, setType] = useState("todo");
+  }
 
   render() {
     return (
@@ -91,6 +100,20 @@ export default class TodoDetailView extends React.Component {
             )}
           </View>
         </View>
+
+
+        <View styles = {styles.valueContainer}>
+          <Text style = {styles.text}>Value: </Text>
+                 <Picker
+                  style = {styles.priorityPicker}
+                  onValueChange = {(itemValue, itemIndex) => this._selectType.Type}>
+                  <Picker.Item label = "subject" value = "s" />
+                  <Picker.Item label = "assignment" value = "as" />
+                  <Picker.Item label = "todo" value = "todo" />
+                  <Picker.Item label = "need to watch again" value = "streaming" />
+                </Picker>
+        </View>
+
         <View style={styles.dueDateContainer}>
           <Text style={styles.text}>End Date :</Text>
           {this.props.todo.dueDate === '' ? (
@@ -102,6 +125,8 @@ export default class TodoDetailView extends React.Component {
             <Icon name="event" />
           </TouchableOpacity>
         </View>
+
+        
 
         <Modal
           transparent={true}
@@ -127,6 +152,10 @@ export default class TodoDetailView extends React.Component {
             </View>
           </View>
         </Modal>
+        
+
+
+
         {this.props.isEditable ? (
           <TextInput
             value={this.props.todo.description}
@@ -191,6 +220,10 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   stateContainer: {
+    flexDirection: 'row',
+    padding: 5,
+  },
+  valueContainer:{
     flexDirection: 'row',
     padding: 5,
   },

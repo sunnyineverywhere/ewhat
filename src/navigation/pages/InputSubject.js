@@ -1,7 +1,5 @@
 import React from "react";
-import styled, {ThemeProvider} from 'styled-components/native'
 import 'react-native-gesture-handler';
-import { Dimensions, StatusBar, Text } from "react-native";
 import { theme } from "../../components/theme";
 import PropsTypes from 'prop-types'
 import { useState } from "react";
@@ -12,8 +10,58 @@ import Inputs from "../../components/SubjectInput/Inputs";
 import SubjectTask from "../../components/SubjectInput/Task";
 import AppLoading from "expo-app-loading";
 import { AsyncStorage } from "react-native";
-import { View } from "react-native";
+import { View,  StyleSheet, Dimensions, StatusBar, Text, TextInput, ScrollView} from "react-native";
+import SubjectInsert from '../../components/SubjectInput/SubjectInsert';
+import SubjectList from '../../components/SubjectInput/SubjectList';
+import SubjectListItem from "../../components/SubjectInput/SubjectListItem";
 
+const InputSubject = () => {
+  return(
+    <View style = {styles.container}>
+      <Text style = {styles.pageTitle}>Lecture List</Text>
+      <View style = {styles.card}>
+        <SubjectInsert />
+        <SubjectList />
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.color3,
+  },
+  pageTitle:{
+    color: theme.color1,
+    fontSize: 36,
+    fontWeight: '800',
+    marginTop: 30,
+    marginBottom: 10,
+    fontWeight: '300',
+    textAlign: 'center',
+    backgroundColor: theme.color3,
+  },
+  card: {
+    backgroundColor: theme.color5,
+    flex: 1,
+    borderTopLeftRadius: 10, // to provide rounded corners
+    borderTopRightRadius: 10, // to provide rounded corners
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  input: {
+    padding: 20,
+    borderBottomColor: '#bbb',
+    borderBottomWidth: 1,
+    fontSize: 24,
+    marginLeft: 20,
+  },
+});
+
+
+
+/*
 const List = styled.ScrollView`
     flex: 1;
     width: ${({width}) => width - 40}px;`
@@ -111,6 +159,7 @@ const Title = styled.Text`
     margin: 20px;`
 
 
+*/
 
 export default InputSubject;
 
@@ -118,4 +167,5 @@ export default InputSubject;
            <Button 
             title = "move to calandar"
             onPress = {() => navigation.navigate('FirstSetting')} />
+
             */
