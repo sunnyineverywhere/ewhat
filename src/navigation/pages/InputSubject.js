@@ -11,7 +11,7 @@ import { images } from "../../components/Main/image";
 import Inputs from "../../components/SubjectInput/Inputnames";
 import SubjectTask from "../../components/SubjectInput/Task";
 import AppLoading from "expo-app-loading";
-import AsyncStorage from "@react-native-community/async-storage";
+import { AsyncStorage } from "react-native";
 
 const List = styled.ScrollView`
     flex: 1;
@@ -105,7 +105,6 @@ const Container = styled.View`
     flex: 1;
     align-items: center;
     justify-content: center;
-    background-color: #101010;
 `;
 
 const Title = styled.Text`

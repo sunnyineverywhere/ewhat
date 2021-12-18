@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import Todo from '../component/todo';
+import Todo from '../todo';
 import {Icon} from 'react-native-elements';
 
 const {width} = Dimensions.get('window');

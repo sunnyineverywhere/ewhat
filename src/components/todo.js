@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Text} from 'react-native';
+import TodoDetailView from './layout/TodoDetailView'
 import {CheckBox, Icon} from 'react-native-elements';
-import TodoDetailView from './TodoDetailView';
 
 export default class Todo extends React.Component {
   constructor(props) {

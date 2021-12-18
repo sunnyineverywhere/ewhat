@@ -1,10 +1,5 @@
 import React, { useState,useContext,createContext} from 'react';
 import {Stylesheet, TextInput, Text, SafeAreaView, useWindowDimensions, View,FlatList,TouchableOpacity, Alert} from 'react-native';
-import { viewStyles, textStyles } from '../../components/styles';
-import InputTask from '../../components/Main/Input';
-import Task from '../../components/Main/Task'
-import IconButton from '../../components/Main/IconButton';
-import ExpiredTodo from '../../components/ExpiredTodo';
 import { NavigationContainer } from '@react-navigation/native';
 import { images } from '../../components/Main/image';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -12,10 +7,14 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
 import InputSubject from './InputSubject';
-import { Input } from 'react-native-elements/dist/input/Input';
 import Calendars from './Calendar';
 import SearchScreen from './SearchScreen';
 import moment from 'moment';
+import { StyleSheet } from 'react-native';
+import { AppState } from 'react-native';
+import { StatusBar } from 'react-native';
+import TodoList from '../../components/layout/todolist';
+import TodoDetailView from '../../components/layout/TodoDetailView';
 
 const Tab = createBottomTabNavigator();
 
@@ -246,11 +245,6 @@ class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" backgroundColor="#5c3735" />
-        <AppTitleHeader
-          expiredTodos={this.state.expiredTodos}
-          deleteTodo={this._deleteTodo}
-          deleteManyTodo={this._deleteManyTodo}
-        />
         <TodoList
           todos={this.state.todos}
           addTodo={this._addTodo}
@@ -376,16 +370,7 @@ const Main = () => {
                   ),
                 }}
               />
-              <Tab.Screen
-                name="Review"
-                component={ReviewPage}
-                options={{
-                  title: 'Review',
-                  tabBarIcon: ({color, size}) => (
-                    <Icon name="message" color={color} size={size} />
-                  ),
-                }}
-              />
+
             </Tab.Navigator>
           </NavigationContainer>
 
@@ -407,3 +392,16 @@ const styles = StyleSheet.create({
   },
 });
 export default Main;
+
+/*
+<Tab.Screen
+name="Review"
+component={ReviewPage}
+options={{
+  title: 'Review',
+  tabBarIcon: ({color, size}) => (
+    <Icon name="message" color={color} size={size} />
+  ),
+}}
+/>
+*/
