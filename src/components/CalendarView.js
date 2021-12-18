@@ -7,7 +7,7 @@ function CalendarView({markedDates, selectedDate, onSelectDate}) {
     ...markedDates,
     [selectedDate]: {
         selected: true,
-       //undefined오류: marked: markedDates[selectedDate]?.marked,
+        marked: markedDates[selectedDate]?.marked,
     },  
   };
 
