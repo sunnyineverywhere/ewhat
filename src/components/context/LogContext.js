@@ -12,13 +12,13 @@ export function LogContextProvider({children}) {
             id: uuidv4(),
             title: '컴퓨터 구조 복습',
             body: '1강 듣고 필기하기',
-            date: new Date().toISOString(),
+            date: '2021-12-17',
         },
         {
             id: uuidv4(),
             title: '자료 구조 복습',
             body: '1강 듣고 필기하기',
-            date: new Date().toISOString(),
+            date: '2021-12-18',
         },
         {
             id: uuidv4(),
