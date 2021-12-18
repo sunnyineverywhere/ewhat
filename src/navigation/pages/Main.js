@@ -15,7 +15,7 @@ import { AppState } from 'react-native';
 import { StatusBar } from 'react-native';
 import TodoList from '../../components/layout/todolist';
 import TodoDetailView from '../../components/layout/TodoDetailView';
-import CalendarScreens from './Calendar'
+import Calendars from './Calendars'
 
 const Tab = createBottomTabNavigator();
 
