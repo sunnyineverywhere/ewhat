@@ -5,7 +5,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppLoading from 'expo-app-loading';
-import InputSubject from './InputSubject';
 import SearchScreen from './SearchScreen';
 import moment from 'moment';
 import { StyleSheet } from 'react-native';
