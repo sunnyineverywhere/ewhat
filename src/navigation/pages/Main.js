@@ -13,7 +13,7 @@ import { StatusBar } from 'react-native';
 import TodoList from '../../components/layout/todolist';
 import TodoDetailView from '../../components/layout/TodoDetailView';
 import Calendars from './Calendars';
-
+import ExpiredTodo from '../../components/ExpiredTodo';
 
 const Tab = createBottomTabNavigator();
 
@@ -313,6 +313,18 @@ const Main = () => {
                   ),
                 }}
               />
+            <Tab.Screen
+       name="Review"
+       component={ExpiredTodo}
+       options={{
+         title: '리뷰',
+         tabBarIcon: ({color, size}) => (
+           <Icon name="message" color={color} size={size} />
+         ),
+       }}
+     />
+   </Tab.Navigator>
+
 
             </Tab.Navigator>
           </NavigationContainer>
