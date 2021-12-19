@@ -19,12 +19,12 @@ function Calendars() {
         return acc;
       }, {}),
     [logs],
-  );
+  );**/
 
   const filteredLogs = logs.filter(
     log => format(new Date(log.date), 'yyyy-MM-dd') === selectedDate,
   );
-**/
+
   
   return (
     //<SearchList
