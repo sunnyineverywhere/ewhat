@@ -9,7 +9,7 @@ function Calendars() {
   const {logs} = useContext(LogContext);
   const [selectedDate, setSelectedDate] = useState(
     format(new Date(), 'yyyy-MM-dd'),
-  );
+  );**/
     
   const markedDates = useMemo(
     () =>
@@ -19,7 +19,7 @@ function Calendars() {
         return acc;
       }, {}),
     [logs],
-  );**/
+  );
 
   const filteredLogs = logs.filter(
     log => format(new Date(log.date), 'yyyy-MM-dd') === selectedDate,
