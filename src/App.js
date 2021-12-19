@@ -8,7 +8,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 //import { uuid as uuidv1 } from 'uuid';
 import moment from 'moment';
-
+// before check the codes, these codes are from https://github.com/WonHyun/todo-list-app.git
+// I exactly did let you know this fact. 
+// 
 const Tab = createBottomTabNavigator();
 class FirstScreen extends React.Component {
   render() {
