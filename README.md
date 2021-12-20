@@ -14,4 +14,6 @@ directory
 - images 출처
     - https://icons8.kr
     - https://fonts.google.com/icons
+- function document
+    - https://github.com/WonHyun/todo-list-app.git
 
